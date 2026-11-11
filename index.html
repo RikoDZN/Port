@@ -45,7 +45,7 @@ a:hover{color:inherit}
 @keyframes au2{to{transform:translate(-20vw,18%) scale(0.92)}}
 @keyframes au3{to{transform:translate(12vw,-30%) scale(1.08)}}
 .grain{position:fixed;inset:0;width:100%;height:100%;z-index:80;pointer-events:none;opacity:0.045}
-@media (max-height:1600px){.grain{inset:-6%;width:112%;height:112%;animation:grainJit 0.8s steps(1) infinite}}
+@media (max-height:100000px){.grain{inset:-6%;width:112%;height:112%;animation:grainJit 0.8s steps(1) infinite}}
 @keyframes grainJit{0%{transform:translate(0,0)}12%{transform:translate(-3%,2%)}25%{transform:translate(2%,-3%)}37%{transform:translate(-2%,-1%)}50%{transform:translate(3%,3%)}62%{transform:translate(-3%,-3%)}75%{transform:translate(1%,2%)}87%{transform:translate(-1%,3%)}}
 
 /* ---------- buttons + type ---------- */
@@ -165,7 +165,7 @@ a:hover{color:inherit}
 
 /* ---------- hero: curved gallery ---------- */
 .cv{--H:max(620px,56.25vw);position:relative;view-timeline-name:--cv}
-@media (max-height:1600px){.cv{--H:max(560px,100vh);--H:max(560px,100svh)}}
+@media (max-height:100000px){.cv{--H:max(560px,100vh);--H:max(560px,100svh)}}
 .cv-stage{position:relative;height:var(--H);overflow:hidden;-webkit-user-select:none;user-select:none;background:radial-gradient(ellipse 80% 60% at 50% 60%,#17131F 0%,#0C0A11 48%,#07060A 80%)}
 .cv-stage::before{content:"";position:absolute;left:50%;top:60%;width:min(1200px,92vw);height:52%;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 10%,transparent),transparent);pointer-events:none}
 .cv-gl{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y;-webkit-tap-highlight-color:transparent}
@@ -288,12 +288,12 @@ a:hover{color:inherit}
 .wk-skip:focus-visible{outline:2px solid var(--a);outline-offset:2px}
 .wk.pin .wk-skip{display:inline-flex}
 @keyframes skipNudge{50%{transform:translateY(3px)}}
-@media (max-height:1600px) and (min-width:761px) and (prefers-reduced-motion: no-preference){
+@media (max-height:100000px) and (min-width:761px) and (prefers-reduced-motion: no-preference){
 .wk-pin{height:calc(100vh + 7 * 30vh)}
 .wk-stage{position:sticky;top:0;height:100vh;margin:0;border-radius:0;box-shadow:none}
 .wk-ui{padding:96px clamp(24px,3vw,48px) clamp(22px,2.6vw,40px)}
 }
-@supports (animation-timeline: view()){@media (max-height:1600px) and (min-width:761px) and (prefers-reduced-motion: no-preference){
+@supports (animation-timeline: view()){@media (max-height:100000px) and (min-width:761px) and (prefers-reduced-motion: no-preference){
 .wk-pin{view-timeline-name:--wkpin}
 .wk-stage{animation:wkIn linear both;animation-timeline:--wkpin;animation-range:entry 15% entry 100%}
 }}
@@ -305,7 +305,7 @@ a:hover{color:inherit}
 .wk-act .b{min-height:44px;padding:0 16px;font-size:14px}
 .wk-skip{padding:0 13px}
 }
-@media (max-height:1600px) and (max-width:760px) and (prefers-reduced-motion: no-preference){
+@media (max-height:100000px) and (max-width:760px) and (prefers-reduced-motion: no-preference){
 .wk{--wkh:min(clamp(440px,140vw,640px),calc(100svh - 96px))}
 .wk-pin{height:calc(var(--wkh) + 7 * 30svh)}
 .wk-stage{position:sticky;top:max(76px,calc(50svh - var(--wkh) / 2 + 20px));height:var(--wkh)}
@@ -348,7 +348,7 @@ a:hover{color:inherit}
 .spot{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity 0.5s;background:radial-gradient(circle at var(--sx) var(--sy),rgba(7,6,10,0) 0,rgba(7,6,10,0) 170px,rgba(7,6,10,0.6) 430px)}
 @media (hover:hover) and (pointer:fine){.grid-w:hover .spot{opacity:1}}
 @media (hover:none){.g-cap{opacity:1;transform:none}}
-@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.g.big.rt{grid-column:span 2}}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.g.big,.g.big.rt{grid-column:span 2;grid-row:auto}.g.big .g-btn{aspect-ratio:16 / 9;height:auto}}
 @media (max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}.g.big,.g.big.rt{grid-column:auto;grid-row:auto}.g.big .g-btn{aspect-ratio:16 / 9;height:auto}}
 
 /* ---------- services ---------- */
@@ -405,7 +405,7 @@ a:hover{color:inherit}
 .ps-f{position:relative;margin:0;aspect-ratio:16 / 9;overflow:hidden;background:#15131C}
 .ps-f img{display:block;width:100%;height:100%;object-fit:cover}
 .ps-f figcaption{position:absolute;left:14px;bottom:14px;padding:6px 10px;border-radius:8px;background:rgba(7,6,10,0.82);font-size:10px;color:#E6E3EC}
-@supports (animation-timeline: view()){@media (max-height:1600px) and (min-width:861px) and (prefers-reduced-motion: no-preference){
+@supports (animation-timeline: view()){@media (max-height:100000px) and (min-width:861px) and (prefers-reduced-motion: no-preference){
 .proc-pin{height:360vh;view-timeline-name:--proc}
 .proc-stage{position:sticky;top:0;height:100vh;display:flex;align-items:center}
 .pl{width:100%;grid-template-columns:minmax(0,0.85fr) minmax(0,1.3fr);grid-template-rows:repeat(4,auto);column-gap:clamp(32px,5vw,88px);row-gap:4px;align-content:center}
@@ -703,7 +703,7 @@ a:hover{color:inherit}
 </div>
 <div class="tabs rv-g"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><button type="button" class="fp {{ t.cls }}" aria-pressed="{{ t.pressed }}" onClick="{{ t.pick }}">{{ t.label }}<span class="mono">{{ t.n }}</span></button></sc-for></div>
 <div class="cards {{ svcCls }}" data-t="{{ tab }}">
-<sc-for list="{{ svc }}" as="it" hint-placeholder-count="6"><article class="card" data-t="{{ it.t }}" style="--i: {{ it.ti }}"><div class="card-img"><img src="{{ it.img }}" alt="" loading="lazy" decoding="async" style="object-position: {{ it.pos }}"><sc-if value="{{ it.hasSave }}" hint-placeholder-val="{{ false }}"><span class="card-save mono">Save {{ it.save }}</span></sc-if></div><div class="card-body"><span class="card-work mono">{{ it.work }}</span><h3 class="card-name">{{ it.name }}</h3><p class="card-desc">{{ it.desc }}</p><div class="card-foot"><span class="card-price">{{ it.price }}</span><span class="card-note mono">{{ it.note }}</span></div></div></article></sc-for>
+<sc-for list="{{ svc }}" as="it" hint-placeholder-count="6"><article class="card" data-t="{{ it.t }}" style="--i: {{ it.ti }}"><div class="card-img"><img src="{{ it.img }}" alt="{{ it.alt }}" width="960" height="540" loading="lazy" decoding="async"><sc-if value="{{ it.hasSave }}" hint-placeholder-val="{{ false }}"><span class="card-save mono">Save {{ it.save }}</span></sc-if></div><div class="card-body"><span class="card-work mono">{{ it.work }}</span><h3 class="card-name">{{ it.name }}</h3><p class="card-desc">{{ it.desc }}</p><div class="card-foot"><span class="card-price">{{ it.price }}</span><span class="card-note mono">{{ it.note }}</span></div></div></article></sc-for>
 </div>
 <div class="xtra">
 <div class="xbox rv">
@@ -900,56 +900,37 @@ class Component extends DCLogic {
     ];
   }
   services() {
-    const I = {
-      heist: 'images/w10-heist-city-sm.webp',
-      entity: 'images/w18-entity-hunters-sm.webp',
-      winter: 'images/w11-winter-zipline-sm.webp',
-      duck: 'images/w07-duck-sm.webp',
-      party: 'images/w09-party-royale-sm.webp',
-      gold: 'images/w06-pirate-gold-sm.webp',
-      day: 'images/w01-pirate-day-sm.webp',
-      ruined: 'images/w15-ruined-sm.webp',
-      loadouts: 'images/w05-loadouts-sm.webp',
-      best30: 'images/w04-best30-sm.webp',
-      hide: 'images/w08-hide-seek-sm.webp',
-      eclipse: 'images/w14-eclipse-sm.webp',
-      sea: 'images/w13-sea-queen-sm.webp',
-      crowd: 'images/w03-crowd-sm.webp',
-      clutch: 'images/w16-clutch-iq-sm.webp',
-      secret: 'images/w02-treasure-secret-sm.webp',
-      newitems: 'images/w12-new-items-sm.webp'
-    };
     const list = [
-      { t: 'map', name: 'Key Art', price: '$125+', work: 'New scene', desc: "Your map's main image (1920 × 1080), what players see in Discover.", img: I.heist, pos: '30% 50%' },
-      { t: 'map', name: 'Portrait Key Art', price: '$125+', note: '+$75 with key art', work: 'New or your scene', desc: 'The tall version (1440 × 1920) Fortnite also asks for.', img: I.entity },
-      { t: 'map', name: 'Lobby Background', price: '$75+', work: 'New scene', desc: 'The image players see while waiting in your lobby.', img: I.winter },
-      { t: 'map', name: 'Update / Patch Art', price: '$80+', work: 'New scene', desc: 'An image announcing an update, new mode or season.', img: I.duck },
-      { t: 'map', name: 'Discover Banner', price: '$110+', work: 'New scene', desc: 'A wide banner for Discover placements.', img: I.party },
-      { t: 'map', name: 'Update Refresh', price: '$70', work: 'Your scene', desc: 'New key art for your latest update. Returning clients only.', img: I.gold },
-      { t: 'thumbs', name: 'Thumbnail', price: '$40+', work: 'New scene', desc: 'One custom thumbnail.', img: I.ruined },
-      { t: 'thumbs', name: '3 Thumbnail Bundle', price: '$110+', work: 'New scenes', desc: 'Three thumbnails for less per piece.', img: I.loadouts },
-      { t: 'thumbs', name: '3 Thumbnails + A/B', price: '$165+', work: 'New scenes', desc: 'Three thumbnails, each with a second design to test clicks.', img: I.best30 },
-      { t: 'thumbs', name: 'Old Video Revival', price: '$99', work: 'New scenes', desc: 'New thumbnails for 3 older videos to bring new views.', img: I.hide },
-      { t: 'bundles', name: 'Key Art + Lobby', price: '$175', save: '$25', work: 'Bundle', desc: 'Matching key art and lobby, good for small maps.', img: I.winter },
-      { t: 'bundles', name: 'Island Asset Pack', price: '$185', save: '$45', work: 'Bundle', desc: 'Landscape and portrait key art, each with and without your logo, ready to upload.', img: I.entity },
-      { t: 'bundles', name: 'Discover Pack', price: '$215', save: '$20', work: 'Bundle', desc: 'Key art plus a Discover banner.', img: I.party },
-      { t: 'bundles', name: 'Launch Day Kit', price: '$239', save: '$106', work: 'Bundle', desc: 'Island Asset Pack, plus a lobby and a free 2-day rush.', img: I.heist, pos: '30% 50%' },
-      { t: 'bundles', name: 'Key Art A/B Test Pack', price: '$299', save: '$111', work: 'Bundle', desc: '2 key art designs to test, plus a free lobby and 2 free portrait versions.', img: I.day },
-      { t: 'bundles', name: 'Full Island Kit', price: '$449', save: '$176', work: 'Bundle', desc: '8 matching pieces: 3 key arts, lobby, update art, 2 portraits and a wallpaper. Priority queue.', img: I.duck },
-      { t: 'walls', name: 'Custom Wallpaper', price: '$75+', work: 'New scene', desc: 'One high-res wallpaper of your idea.', img: I.eclipse },
-      { t: 'walls', name: 'Character Wallpaper', price: '$85+', work: 'New scene', desc: 'A wallpaper starring your own Fortnite skin or character.', img: I.sea },
-      { t: 'walls', name: 'Desktop + Mobile', price: '$90+', work: 'New + your scene', desc: 'PC and phone versions, redesigned for 9:16, not cropped.', img: I.winter },
-      { t: 'walls', name: 'Full Screen Set', price: '$110+', work: 'New + your scene', desc: 'Desktop, phone and lock screen versions.', img: I.crowd },
-      { t: 'walls', name: 'Creator Community Pack', price: '$160+', work: 'New + your scene', desc: "A branded desktop and phone set in 3 colors for a creator's fans.", img: I.best30 },
-      { t: 'plans', name: 'Creator Pack', price: '$159', save: '$26', work: 'Plan', desc: '4 thumbnails + 1 A/B, paid once.', img: I.clutch },
-      { t: 'plans', name: 'Monthly Plan', price: '$149/mo', save: '$36/mo', work: 'Plan', desc: 'The Creator Pack every month, with priority turnaround.', img: I.secret },
-      { t: 'plans', name: 'Update Pass', price: '$180', save: '$30', work: 'Plan', desc: '3 prepaid Update Refreshes for your next map updates.', img: I.newitems },
-      { t: 'plans', name: 'Season Pack', price: '$999', note: 'or 4 × $250', save: '$421', work: 'Plan', desc: '16 map arts for a season: 4 key arts, 4 portraits, 4 lobbies and 4 update arts. Priority queue.', img: I.heist, pos: '30% 50%' }
+      { t: 'map', name: 'Key Art', price: '$125+', work: 'New scene', desc: "Your map's main image (1920 × 1080), what players see in Discover.", img: 'images/menu-key-art.webp' },
+      { t: 'map', name: 'Portrait Key Art', price: '$125+', note: '+$75 with key art', work: 'New or your scene', desc: 'The tall version (1440 × 1920) Fortnite also asks for.', img: 'images/menu-portrait.webp' },
+      { t: 'map', name: 'Lobby Background', price: '$75+', work: 'New scene', desc: 'The image players see while waiting in your lobby.', img: 'images/menu-lobby.webp' },
+      { t: 'map', name: 'Update / Patch Art', price: '$80+', work: 'New scene', desc: 'An image announcing an update, new mode or season.', img: 'images/menu-update-art.webp' },
+      { t: 'map', name: 'Discover Banner', price: '$110+', work: 'New scene', desc: 'A wide banner for Discover placements.', img: 'images/menu-banner.webp' },
+      { t: 'map', name: 'Update Refresh', price: '$70', work: 'Your scene', desc: 'New key art for your latest update. Returning clients only.', img: 'images/menu-refresh.webp' },
+      { t: 'thumbs', name: 'Thumbnail', price: '$40+', work: 'New scene', desc: 'One custom thumbnail.', img: 'images/menu-thumbnail.webp' },
+      { t: 'thumbs', name: '3 Thumbnail Bundle', price: '$110+', work: 'New scenes', desc: 'Three thumbnails for less per piece.', img: 'images/menu-bundle3.webp' },
+      { t: 'thumbs', name: '3 Thumbnails + A/B', price: '$165+', work: 'New scenes', desc: 'Three thumbnails, each with a second design to test clicks.', img: 'images/menu-ab3.webp' },
+      { t: 'thumbs', name: 'Old Video Revival', price: '$99', work: 'New scenes', desc: 'New thumbnails for 3 older videos to bring new views.', img: 'images/menu-revival.webp' },
+      { t: 'bundles', name: 'Key Art + Lobby', price: '$175', save: '$25', work: 'Bundle', desc: 'Matching key art and lobby, good for small maps.', img: 'images/menu-keyart-lobby.webp' },
+      { t: 'bundles', name: 'Island Asset Pack', price: '$185', save: '$45', work: 'Bundle', desc: 'Landscape and portrait key art, each with and without your logo, ready to upload.', img: 'images/menu-asset-pack.webp' },
+      { t: 'bundles', name: 'Discover Pack', price: '$215', save: '$20', work: 'Bundle', desc: 'Key art plus a Discover banner.', img: 'images/menu-discover-pack.webp' },
+      { t: 'bundles', name: 'Launch Day Kit', price: '$239', save: '$106', work: 'Bundle', desc: 'Island Asset Pack, plus a lobby and a free 2-day rush.', img: 'images/menu-launch-kit.webp' },
+      { t: 'bundles', name: 'Key Art A/B Test Pack', price: '$299', save: '$111', work: 'Bundle', desc: '2 key art designs to test, plus a free lobby and 2 free portrait versions.', img: 'images/menu-ab-pack.webp' },
+      { t: 'bundles', name: 'Full Island Kit', price: '$449', save: '$176', work: 'Bundle', desc: '8 matching pieces: 3 key arts, lobby, update art, 2 portraits and a wallpaper. Priority queue.', img: 'images/menu-full-kit.webp' },
+      { t: 'walls', name: 'Custom Wallpaper', price: '$75+', work: 'New scene', desc: 'One high-res wallpaper of your idea.', img: 'images/menu-wall-custom.webp' },
+      { t: 'walls', name: 'Character Wallpaper', price: '$85+', work: 'New scene', desc: 'A wallpaper starring your own Fortnite skin or character.', img: 'images/menu-wall-character.webp' },
+      { t: 'walls', name: 'Desktop + Mobile', price: '$90+', work: 'New + your scene', desc: 'PC and phone versions, redesigned for 9:16, not cropped.', img: 'images/menu-wall-duo.webp' },
+      { t: 'walls', name: 'Full Screen Set', price: '$110+', work: 'New + your scene', desc: 'Desktop, phone and lock screen versions.', img: 'images/menu-wall-set.webp' },
+      { t: 'walls', name: 'Creator Community Pack', price: '$160+', work: 'New + your scene', desc: "A branded desktop and phone set in 3 colors for a creator's fans.", img: 'images/menu-wall-pack.webp' },
+      { t: 'plans', name: 'Creator Pack', price: '$159', save: '$26', work: 'Plan', desc: '4 thumbnails + 1 A/B, paid once.', img: 'images/menu-creator-pack.webp' },
+      { t: 'plans', name: 'Monthly Plan', price: '$149/mo', save: '$36/mo', work: 'Plan', desc: 'The Creator Pack every month, with priority turnaround.', img: 'images/menu-monthly.webp' },
+      { t: 'plans', name: 'Update Pass', price: '$180', save: '$30', work: 'Plan', desc: '3 prepaid Update Refreshes for your next map updates.', img: 'images/menu-update-pass.webp' },
+      { t: 'plans', name: 'Season Pack', price: '$999', note: 'or 4 × $250', save: '$421', work: 'Plan', desc: '16 map arts for a season: 4 key arts, 4 portraits, 4 lobbies and 4 update arts. Priority queue.', img: 'images/menu-season.webp' }
     ];
     const seen = {};
     return list.map((x) => {
       seen[x.t] = (seen[x.t] || 0) + 1;
-      return { t: x.t, ti: seen[x.t] - 1, name: x.name, price: x.price, work: x.work, desc: x.desc, img: x.img, pos: x.pos || '50% 50%', note: x.note || '', save: x.save || '', hasSave: !!x.save };
+      return { t: x.t, ti: seen[x.t] - 1, name: x.name, price: x.price, work: x.work, desc: x.desc, img: x.img, alt: 'Example of ' + x.name + ', made with RikoDZN art', note: x.note || '', save: x.save || '', hasSave: !!x.save };
     });
   }
   renderVals() {

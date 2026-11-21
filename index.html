@@ -151,9 +151,12 @@ a:hover{color:inherit}
 .zi-mask[data-lit] .zi-spot{opacity:1}
 .zi-rf2{display:none}
 @media (max-height:100000px) and (prefers-reduced-motion: no-preference){
-.v2.zo .zi-rf2{display:flex;position:absolute;left:var(--rx,0px);top:var(--ry,0px);z-index:4;margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:min(13.6vw,30vh);line-height:0.86;letter-spacing:-0.045em;white-space:nowrap;color:transparent;-webkit-text-fill-color:transparent;background-image:var(--rimg);background-repeat:no-repeat;background-size:var(--rbs,0 0);background-position:var(--rbp,0 0);-webkit-background-clip:text;background-clip:text;transform:scaleY(-1);transform-origin:50% 50%;opacity:calc(var(--zco,1) * 0.62);filter:blur(1.2px) saturate(1.2);-webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.45) 26%,transparent 62%);mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.45) 26%,transparent 62%);pointer-events:none}
+.v2.zo .zi-rf2{display:flex;position:absolute;left:var(--rx,0px);top:var(--ry,0px);z-index:4;margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:min(13.6vw,30vh);line-height:0.86;letter-spacing:-0.045em;white-space:nowrap;color:transparent;-webkit-text-fill-color:transparent;background-image:var(--rimg);background-repeat:no-repeat;background-size:var(--rbs,0 0);background-position:var(--rbp,0 0);-webkit-background-clip:text;background-clip:text;transform:scaleY(-1);transform-origin:50% 50%;opacity:calc(var(--zco,1) * 0.78);filter:url(#zi-water) brightness(0.82) saturate(1.35) blur(0.4px);-webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 22%,rgba(0,0,0,0.18) 55%,transparent 80%);mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.6) 22%,rgba(0,0,0,0.18) 55%,transparent 80%);pointer-events:none}
 .v2.zo .zi-stage:not([data-rf]) .zi-rf2{visibility:hidden}
-.zi-floor{position:absolute;left:50%;width:min(1500px,96vw);height:2px;translate:-50% 0;top:var(--rfl,60%);z-index:4;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--a) 70%,transparent) 30%,rgba(255,214,170,0.8) 50%,color-mix(in srgb,var(--a) 70%,transparent) 70%,transparent);opacity:calc(var(--zco,1) * 0.5);filter:blur(0.5px);box-shadow:0 0 24px color-mix(in srgb,var(--a) 50%,transparent);pointer-events:none}
+.zi-fx{position:absolute;width:0;height:0;overflow:hidden}
+.zi-water{position:absolute;left:0;right:0;top:var(--rfl,60%);bottom:0;z-index:4;pointer-events:none;opacity:var(--zco,1);background:repeating-linear-gradient(180deg,transparent 0 7px,rgba(170,205,255,0.06) 8px,transparent 10px,transparent 17px,rgba(255,190,220,0.04) 18px,transparent 20px),linear-gradient(180deg,rgba(40,70,120,0.16),rgba(10,16,30,0.35) 60%,rgba(4,4,8,0.6));background-size:100% 160px,100% 100%;filter:url(#zi-water);-webkit-mask-image:linear-gradient(180deg,#000,rgba(0,0,0,0.7) 40%,transparent 95%);mask-image:linear-gradient(180deg,#000,rgba(0,0,0,0.7) 40%,transparent 95%);animation:waterDrift 9s linear infinite}
+@keyframes waterDrift{to{background-position:0 160px,0 0}}
+.zi-floor{position:absolute;left:50%;width:min(1500px,96vw);height:2px;translate:-50% 0;top:var(--rfl,60%);z-index:4;background:linear-gradient(90deg,transparent,rgba(150,190,255,0.55) 25%,rgba(230,240,255,0.85) 50%,rgba(150,190,255,0.55) 75%,transparent);opacity:calc(var(--zco,1) * 0.35);filter:blur(1px);box-shadow:0 0 30px 2px color-mix(in srgb,#8FB8FF 45%,transparent);pointer-events:none}
 }
 @media (max-width:760px){.v2.zo .zi-rf2{font-size:min(13.6vw,24vh)}}
 
@@ -834,6 +837,8 @@ a:hover{color:inherit}
 <img class="zi-img" src="images/w13-sea-queen-lg.webp" alt="Sea Queen wallpaper by RikoDZN: a sea queen with glowing yellow eyes holding a trident, rising from the ocean under a full moon" fetchpriority="high" decoding="async">
 <div class="zi-shade" aria-hidden="true"></div>
 <div class="zi-mask" aria-hidden="true"><i class="zi-beam"></i><i class="zi-spot"></i><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
+<svg class="zi-fx" aria-hidden="true" width="0" height="0"><filter id="zi-water" x="-5%" y="-25%" width="110%" height="150%" color-interpolation-filters="sRGB"><feTurbulence class="zi-turb" type="fractalNoise" baseFrequency="0.003 0.05" numOctaves="1" seed="4" result="n"></feTurbulence><feDisplacementMap class="zi-disp" in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter></svg>
+<i class="zi-water" aria-hidden="true"></i>
 <i class="zi-floor" aria-hidden="true"></i>
 <p class="zi-rf2" aria-hidden="true"><span>R</span><span>I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p>
 <div class="zi-top" aria-hidden="true"><p class="kick mono"><i></i>Commissions open · Fortnite &amp; UEFN</p></div>
@@ -2775,7 +2780,15 @@ class Component extends DCLogic {
       this._rfRaf = 0;
       if (this._dead) return;
       const p = this._zp || 0;
-      if (p < 0.12 && !document.hidden) { try { this.ziMirror(); } catch (err) {} }
+      if (p < 0.12 && !document.hidden) {
+        try { this.ziMirror(); } catch (err) {}
+        try {
+          const t = performance.now() / 1000;
+          if (!this._wt) this._wt = [document.querySelector('.zi-turb'), document.querySelector('.zi-disp')];
+          if (this._wt[0]) this._wt[0].setAttribute('baseFrequency', (0.003 + 0.0008 * Math.sin(t * 0.7)).toFixed(5) + " " + (0.05 + 0.012 * Math.sin(t * 1.1)).toFixed(5));
+          if (this._wt[1]) this._wt[1].setAttribute('scale', (16 + 5 * Math.sin(t * 1.6)).toFixed(2));
+        } catch (err) {}
+      }
       this._rfRaf = requestAnimationFrame(tick);
     };
     this._rfRaf = requestAnimationFrame(tick);

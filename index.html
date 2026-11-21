@@ -27,7 +27,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:#07060A}
 a{color:inherit}
 a:hover{color:inherit}
-.v2{--bg:#07060A;--ink:#F4F1EA;--mut:#ABA7B5;--lab:#918D9E;--line:rgba(255,255,255,0.1);--glass:rgba(255,255,255,0.04);--ease:cubic-bezier(0.2,0.8,0.2,1);--mx:0;--my:0;position:relative;isolation:isolate;min-height:100vh;overflow-x:clip;background:var(--bg);color:var(--ink);font-family:Geist,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.v2{--sun:linear-gradient(100deg,#FFB547 0%,var(--a) 46%,#9B5CFF 100%);--sun-t:linear-gradient(100deg,#FFC46B 0%,var(--a) 30%,#B07CFF 50%,var(--a) 70%,#FFC46B 100%);--bg:#07060A;--ink:#F4F1EA;--mut:#ABA7B5;--lab:#918D9E;--line:rgba(255,255,255,0.1);--glass:rgba(255,255,255,0.04);--ease:cubic-bezier(0.2,0.8,0.2,1);--mx:0;--my:0;position:relative;isolation:isolate;min-height:100vh;overflow-x:clip;background:var(--bg);color:var(--ink);font-family:Geist,system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 .v2 *,.v2 *::before,.v2 *::after{box-sizing:border-box}
 .v2 ::selection{background:var(--a);color:#07060A}
 .wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 clamp(18px,3vw,40px)}
@@ -39,8 +39,8 @@ a:hover{color:inherit}
 .aura{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .aura i{position:absolute;width:62vw;aspect-ratio:1;border-radius:50%}
 .aura i:nth-child(1){left:-18vw;top:-20vw;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 13%,transparent),transparent);animation:au1 38s ease-in-out infinite alternate}
-.aura i:nth-child(2){right:-24vw;top:30%;background:radial-gradient(closest-side,rgba(126,96,255,0.15),transparent);animation:au2 44s ease-in-out infinite alternate}
-.aura i:nth-child(3){left:20vw;bottom:-34vw;background:radial-gradient(closest-side,rgba(255,120,80,0.09),transparent);animation:au3 52s ease-in-out infinite alternate}
+.aura i:nth-child(2){right:-24vw;top:30%;background:radial-gradient(closest-side,rgba(155,92,255,0.2),transparent);animation:au2 44s ease-in-out infinite alternate}
+.aura i:nth-child(3){left:20vw;bottom:-34vw;background:radial-gradient(closest-side,rgba(255,170,70,0.13),transparent);animation:au3 52s ease-in-out infinite alternate}
 @keyframes au1{to{transform:translate(22vw,26%) scale(1.1)}}
 @keyframes au2{to{transform:translate(-20vw,18%) scale(0.92)}}
 @keyframes au3{to{transform:translate(12vw,-30%) scale(1.08)}}
@@ -51,8 +51,8 @@ a:hover{color:inherit}
 /* ---------- buttons + type ---------- */
 .b{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:1px solid transparent;font-family:Geist,sans-serif;font-weight:600;font-size:15px;line-height:1;text-decoration:none;cursor:pointer;transition:background 0.3s,color 0.3s,border-color 0.3s,box-shadow 0.3s,translate 0.35s var(--ease)}
 .b svg{width:18px;height:18px;flex:none}
-.b-a{background:var(--a);color:#07060A;box-shadow:0 12px 40px -14px color-mix(in srgb,var(--a) 75%,transparent)}
-.b-a:hover{color:#07060A;box-shadow:0 16px 54px -10px var(--a)}
+.b-a{background:var(--sun);background-size:140% 100%;background-position:0 0;color:#0B0710;box-shadow:0 12px 40px -14px color-mix(in srgb,var(--a) 75%,transparent);transition:background-position 0.5s var(--ease),box-shadow 0.3s,translate 0.35s var(--ease)}
+.b-a:hover{color:#0B0710;background-position:100% 0;box-shadow:0 16px 54px -10px var(--a),0 10px 70px -20px #9B5CFF}
 .b-g{background:rgba(255,255,255,0.06);color:var(--ink);border-color:rgba(255,255,255,0.18);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .b-g:hover{border-color:var(--ink)}
 .b-xl{min-height:64px;padding:0 34px;font-size:17px}
@@ -65,15 +65,98 @@ a:hover{color:inherit}
 .h2 em,.cta-h em,.stmt-t em,.cv-sub em{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:900;font-optical-sizing:auto;letter-spacing:-0.02em;color:var(--a)}
 .af-classic :is(.h2,.cta-h,.stmt-t,.cv-sub) em{font-family:'Playfair Display',Georgia,serif;font-weight:900;letter-spacing:-0.01em}
 .af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub) em{font-family:'Kaushan Script',cursive;font-style:normal;font-weight:400;letter-spacing:0}
-.v2 :is(.h2,.cta-h,.stmt-t,.cv-sub) em{padding:0 0.14em;margin:0 -0.14em;background-image:linear-gradient(100deg,var(--a) 0%,var(--a) 40%,color-mix(in srgb,var(--a) 28%,#FFFFFF) 50%,var(--a) 60%,var(--a) 100%);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:shine 7s ease-in-out 1.6s infinite}
+.v2 :is(.h2,.cta-h,.stmt-t,.cv-sub) em{padding:0 0.14em;margin:0 -0.14em;background-image:var(--sun-t);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:shine 9s linear infinite alternate}
 .v2 :is(.h2,.cta-h,.stmt-t,.cv-sub) em::selection{-webkit-text-fill-color:#07060A}
 .af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub) em{padding:0 0.22em;margin:0 -0.22em;-webkit-text-stroke:0.028em var(--a)}
 .af-brush :is(.h2,.cta-h) em{font-size:1.1em}
-@keyframes shine{0%,55%{background-position:100% 0}90%,100%{background-position:0% 0}}
+@keyframes shine{0%{background-position:100% 0}100%{background-position:0% 0}}
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;margin-bottom:clamp(36px,5vw,64px)}
 .note{margin:0;max-width:430px;color:var(--mut);font-size:16px}
 .tl{color:var(--ink);text-decoration:underline;text-decoration-color:var(--a);text-decoration-thickness:1.5px;text-underline-offset:3px;transition:color 0.25s}
 .tl:hover{color:var(--a)}
+
+
+/* ---------- zoom-through intro + poster ---------- */
+.zi{position:relative;z-index:1}
+.zi-stage{position:relative;height:min(100vh,1000px);min-height:640px;overflow:hidden;background:#07060A;-webkit-user-select:none;user-select:none}
+.zi-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--zi,1.04));transform-origin:50% 45%}
+.zi-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,6,10,0.7) 0%,rgba(7,6,10,0) 24%,rgba(7,6,10,0) 36%,rgba(30,10,38,0.72) 58%,rgba(7,6,10,0.97) 84%),radial-gradient(90% 60% at 50% 110%,color-mix(in srgb,var(--a) 34%,transparent),transparent 70%)}
+.zi-stage .emb{z-index:2}
+.zi-mask{display:none}
+.zi-cue{display:none}
+.zi-ui{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,1.8vh,22px);padding:0 20px clamp(30px,6vh,64px);text-align:center}
+.zi-ui .cv-h{font-size:clamp(52px,min(10.4vw,17vh),176px)}
+.zi-plat{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:4px 0 0;color:#CFCBD8}
+.zi-plat span{display:inline-flex;align-items:center;gap:22px}
+.zi-plat span + span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--sun);margin-left:-22px;margin-right:0;position:relative;left:-9px}
+@media (max-height:100000px) and (prefers-reduced-motion: no-preference){
+.v2.zo .zi-pin{height:calc(100vh + 230vh)}
+.v2.zo .zi-stage{position:sticky;top:0;height:100vh;min-height:0}
+.v2.zo .zi-mask{display:flex;position:absolute;inset:0;z-index:4;align-items:center;justify-content:center;background:#000;mix-blend-mode:multiply;transform:translate(var(--ztx,0px),var(--zty,0px)) scale(var(--zs,1));transform-origin:var(--zox,50%) var(--zoy,50%);opacity:var(--zmo,1);pointer-events:none}
+.v2.zo .zi-cue{display:flex;position:absolute;left:0;right:0;bottom:clamp(26px,5vh,54px);z-index:5;flex-direction:column;align-items:center;gap:12px;margin:0;color:#E6E3EC;opacity:var(--zco,1);pointer-events:none}
+.v2.zo .zi-cue i{display:block;width:1.5px;height:46px;background:linear-gradient(180deg,var(--a),transparent);animation:cueDrop 1.8s ease-in-out infinite}
+.v2.zo .zi-ui{opacity:var(--zu,0);transform:translateY(calc((1 - var(--zu,0)) * 44px));filter:blur(calc((1 - var(--zu,0)) * 10px))}
+.v2.zo .zi-stage:not([data-ui]) .zi-ui{visibility:hidden}
+.v2.zo .zi-ui > *{animation:none}
+.v2.zo .zi-ui .cv-h .cw > span{animation-name:none,hlFloat,hlInk}
+.v2.zo .zi-ui .cv-h .o > span{animation-name:none,hlFloat,hlStroke}
+.v2.zo .zi-top{opacity:var(--zco,1);transform:translateY(calc((1 - var(--zco,1)) * -30px))}
+}
+.zi-word{position:relative;margin:0;display:flex;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:min(13.6vw,30vh);line-height:0.86;letter-spacing:-0.045em;color:#FFFFFF;white-space:nowrap}
+.zi-top{position:absolute;left:0;right:0;top:clamp(92px,13vh,140px);z-index:5;display:flex;justify-content:center;pointer-events:none}
+.v2:not(.zo) .zi-top{display:none}
+@keyframes cueDrop{0%{transform:scaleY(0);transform-origin:50% 0}45%{transform:scaleY(1);transform-origin:50% 0}55%{transform:scaleY(1);transform-origin:50% 100%}100%{transform:scaleY(0);transform-origin:50% 100%}}
+@media (max-width:760px){.zi-img{object-position:24% 40%}.zi-word{font-size:min(13.6vw,24vh)}.zi-ui .cv-h{font-size:clamp(46px,15vw,92px)}.zi-plat{gap:8px 18px;font-size:10px}}
+
+/* ---------- shard strip ---------- */
+.shd{position:relative;z-index:2;padding:clamp(70px,9vw,130px) 0 clamp(30px,4vw,60px);overflow:hidden}
+.shd-row{display:flex;justify-content:center;align-items:center;width:max-content;margin:0 auto;padding:0 6vw;transform:translateX(var(--sx,0px))}
+.shd-s{position:relative;flex:none;width:clamp(110px,12.5vw,220px);height:clamp(300px,50vh,560px);margin:0 0 0 calc(clamp(110px,12.5vw,220px) * -0.2);padding:0;border:0;background:#15131C;cursor:zoom-in;clip-path:polygon(24% 0,100% 0,76% 100%,0 100%);translate:0 var(--oy,0);transition:width 0.6s var(--ease),filter 0.4s;filter:saturate(0.9) brightness(0.82)}
+.shd-s:first-child{margin-left:0}
+.shd-s:nth-child(odd){--oy:-5%}
+.shd-s:nth-child(3n){--oy:6%}
+.shd-s img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;scale:1.12;transition:scale 0.8s var(--ease)}
+.shd-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--a) 40%,transparent));opacity:0;transition:opacity 0.4s}
+.shd-s:hover,.shd-s:focus-visible{width:clamp(200px,22vw,380px);filter:none;z-index:2}
+.shd-s:hover img{scale:1}
+.shd-s:hover::after{opacity:1}
+.shd-s:focus-visible{outline:none;filter:none}
+.shd-cue{display:flex;align-items:center;justify-content:center;gap:12px;margin:clamp(28px,3vw,44px) 0 0;color:var(--lab)}
+.shd-cue i{display:block;width:40px;height:1.5px;background:var(--sun)}
+@media (max-width:760px){.shd-s{width:96px;height:min(56vh,380px);margin-left:-20px}.shd-s:hover{width:96px}}
+
+/* ---------- full-screen chapters ---------- */
+.chs{position:relative;z-index:2}
+.ch{position:relative}
+.ch + .ch{margin-top:clamp(18px,2vw,30px)}
+.ch-stage{position:relative;height:min(100vh,900px);min-height:620px;overflow:hidden}
+.ch-frame{position:absolute;inset:0;overflow:hidden;clip-path:inset(calc((1 - var(--cp,1)) * 14%) calc((1 - var(--cp,1)) * 10%) round calc((1 - var(--cp,1)) * 44px + 0px));background:#0E0C14}
+.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(calc(1.22 - var(--cp,1) * 0.14 - var(--cq,0) * 0.06));transform-origin:60% 45%}
+.ch-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,6,10,0.9) 0%,rgba(7,6,10,0.55) 36%,rgba(7,6,10,0) 62%),linear-gradient(0deg,rgba(7,6,10,0.85) 0%,rgba(7,6,10,0) 40%),radial-gradient(70% 60% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}
+.ch-ui{position:absolute;left:0;bottom:0;z-index:2;width:min(900px,100%);padding:0 clamp(20px,4.5vw,72px) clamp(36px,7vh,80px);opacity:var(--cu,1);transform:translateY(calc((1 - var(--cu,1)) * 50px))}
+.ch-n{display:inline-flex;align-items:center;gap:12px;margin:0 0 14px;color:#F4F1EA}
+.ch-n b{background:var(--sun);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:600}
+.ch-n::before{content:"";width:34px;height:1.5px;background:var(--sun)}
+.ch-t{margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:125%;font-size:clamp(44px,5.9vw,112px);line-height:0.86;letter-spacing:-0.035em;text-transform:uppercase;color:#FFFFFF;text-shadow:0 12px 60px rgba(0,0,0,0.55)}
+.ch-t span{display:block;background:var(--sun-t);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:shine 9s linear infinite alternate}
+.ch-d{margin:18px 0 0;max-width:520px;font-size:clamp(16px,1.3vw,19px);color:#E2DFE8}
+.ch-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:24px}
+.ch-p{margin:0;display:flex;align-items:baseline;gap:10px;color:var(--lab)}
+.ch-p b{font-family:Anybody,sans-serif;font-stretch:125%;font-weight:800;font-size:clamp(26px,2.4vw,36px);letter-spacing:-0.02em;color:#FFFFFF}
+.ch-act{display:flex;flex-wrap:wrap;gap:10px}
+.ch-side{position:absolute;right:clamp(20px,4.5vw,72px);bottom:clamp(36px,7vh,80px);z-index:2;display:flex;flex-direction:column;gap:14px;opacity:var(--cu,1);transform:translateX(calc((1 - var(--cu,1)) * 60px))}
+.ch-th{position:relative;display:block;width:clamp(180px,17vw,290px);aspect-ratio:16 / 9;padding:0;border:0;border-radius:14px;overflow:hidden;background:#15131C;cursor:zoom-in;box-shadow:0 0 0 1px rgba(255,255,255,0.22),0 24px 50px -18px rgba(0,0,0,0.8);transition:translate 0.4s var(--ease),box-shadow 0.3s}
+.ch-th:hover{translate:-6px 0;box-shadow:0 0 0 2px var(--a),0 24px 50px -18px rgba(0,0,0,0.8)}
+.ch-th img{width:100%;height:100%;object-fit:cover;display:block}
+.ch-th span{position:absolute;left:10px;bottom:8px;padding:4px 8px;border-radius:999px;background:rgba(7,6,10,0.7);font-size:10px;color:#F4F1EA}
+.ch-big{position:absolute;inset:0;z-index:1;padding:0;border:0;background:none;cursor:zoom-in}
+@media (max-height:100000px) and (prefers-reduced-motion: no-preference){
+.v2.zo .ch{height:190vh}
+.v2.zo .ch + .ch{margin-top:0}
+.v2.zo .ch-stage{position:sticky;top:0;height:100vh;min-height:0}
+}
+@media (max-width:760px){.ch-t{font-size:clamp(28px,11.5vw,72px);font-stretch:100%}}
+@media (max-width:900px){.ch-side{display:none}.ch-frame::after{background:linear-gradient(0deg,rgba(7,6,10,0.95) 0%,rgba(7,6,10,0.6) 45%,rgba(7,6,10,0) 75%),radial-gradient(80% 50% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}.ch-img{object-position:var(--mx-pos,60%) 50%}}
 
 /* ---------- motion system: scroll reveals (the page script sets data-in) ---------- */
 .w{display:inline-block;clip-path:inset(-0.12em -0.4em -0.26em -0.4em)}
@@ -218,9 +301,9 @@ a:hover{color:inherit}
 .cv-stage .emb{z-index:1}
 
 /* ---------- crossed tapes ---------- */
-.tapes{position:relative;z-index:4;height:clamp(150px,14vw,220px);margin-top:clamp(-90px,-5vw,-50px);pointer-events:none}
+.tapes{position:relative;z-index:4;height:clamp(150px,14vw,220px);margin:clamp(20px,3vw,50px) 0 clamp(-40px,-2vw,-20px);pointer-events:none}
 .tape{position:absolute;left:-5%;right:-5%;top:50%;display:flex;overflow:hidden;padding:16px 0;white-space:nowrap}
-.t1{z-index:2;background:var(--a);color:#07060A;transform:translateY(-50%) rotate(-2.4deg);box-shadow:0 24px 60px -24px rgba(0,0,0,0.9)}
+.t1{z-index:2;background:var(--sun);color:#07060A;transform:translateY(-50%) rotate(-2.4deg);box-shadow:0 24px 60px -24px rgba(0,0,0,0.9)}
 .t2{z-index:1;background:#110F17;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);color:transparent;-webkit-text-stroke:1.2px rgba(244,241,234,0.45);transform:translateY(-50%) rotate(2deg)}
 .tape-in{display:flex;flex:none;align-items:center;gap:30px;padding-right:30px;animation:tape 60s linear infinite}
 .t2 .tape-in{animation-duration:76s;animation-direction:reverse}
@@ -587,37 +670,35 @@ a:hover{color:inherit}
 </nav>
 </header>
 
-<!-- HERO: CURVED GALLERY -->
-<section id="top" class="cv {{ cvCls }}" aria-label="Intro">
-<div class="cv-stage">
-<canvas class="cv-gl" aria-hidden="true" onPointerDown="{{ cvDown }}" onPointerMove="{{ cvMove }}" onPointerUp="{{ cvUp }}" onPointerCancel="{{ cvUp }}" onPointerLeave="{{ cvLeave }}"></canvas>
+<!-- HERO: ZOOM-THROUGH INTRO, THEN POSTER -->
+<section id="top" class="zi" aria-label="Intro">
+<div class="zi-pin">
+<div class="zi-stage">
+<img class="zi-img" src="images/w10-heist-city-lg.webp" alt="Heist City map key art by RikoDZN: a masked character in a purple jacket sitting on a green car at sunset among palm trees" fetchpriority="high" decoding="async">
+<div class="zi-shade" aria-hidden="true"></div>
 <div class="emb" aria-hidden="true"><i style="--x: 6%; --s: 4px; --t: 13s; --dl: -2s; --dx: 26px"></i><i style="--x: 14%; --s: 3px; --t: 17s; --dl: -9s; --dx: -18px; --o: 0.55"></i><i style="--x: 23%; --s: 5px; --t: 15s; --dl: -5s; --dx: 20px"></i><i style="--x: 31%; --s: 3px; --t: 19s; --dl: -13s; --dx: -24px; --o: 0.5"></i><i style="--x: 42%; --s: 4px; --t: 14s; --dl: -7s; --dx: 16px"></i><i style="--x: 55%; --s: 3px; --t: 18s; --dl: -1s; --dx: -20px; --o: 0.6"></i><i style="--x: 63%; --s: 5px; --t: 16s; --dl: -11s; --dx: 22px"></i><i style="--x: 72%; --s: 3px; --t: 20s; --dl: -4s; --dx: -16px; --o: 0.5"></i><i style="--x: 81%; --s: 4px; --t: 15s; --dl: -8s; --dx: 18px"></i><i style="--x: 90%; --s: 3px; --t: 17s; --dl: -14s; --dx: -22px; --o: 0.55"></i><i style="--x: 96%; --s: 4px; --t: 13s; --dl: -6s; --dx: -14px"></i></div>
-<div class="cv-ui">
-<div class="cv-top">
+<div class="zi-mask" aria-hidden="true"><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
+<div class="zi-top" aria-hidden="true"><p class="kick mono"><i></i>Commissions open · Fortnite &amp; UEFN</p></div>
+<p class="zi-cue mono" aria-hidden="true">Scroll to enter<i></i></p>
+<div class="zi-ui">
 <p class="kick mono"><i aria-hidden="true"></i>Commissions open · Fortnite &amp; UEFN</p>
 <h1 class="cv-h" aria-label="RikoDZN"><span class="cw" aria-hidden="true"><span style="--k: 0">R</span><span style="--k: 1">I</span><span style="--k: 2">K</span><span style="--k: 3">O</span></span><span class="cw o" aria-hidden="true"><span style="--k: 4">D</span><span style="--k: 5">Z</span><span style="--k: 6">N</span></span></h1>
 <p class="cv-sub">Key art, thumbnails &amp; 3D renders that <em>win the click.</em></p>
-</div>
-<div class="cv-band">
-<p class="cv-now mono" aria-hidden="true"><b>{{ cvNowId }}</b><span>{{ cvNowName }}</span><span>{{ cvNowCat }}</span></p>
-<div class="cv-fb" aria-hidden="true"><sc-for list="{{ cvItems }}" as="t" hint-placeholder-count="18"><button type="button" class="cv-t" tabindex="-1" onClick="{{ t.open }}"><img src="{{ t.src }}" alt="" draggable="false" decoding="async" onLoad="{{ t.load }}"></button></sc-for></div>
-</div>
-<div class="cv-bot">
 <div class="cv-cta">
 <a class="b b-a mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Order on Sky <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
 <a class="b b-g mag" href="#work" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">See the work</a>
 </div>
-<p class="cv-hint mono rv-t" style="--d: 1500ms" aria-hidden="true"><span class="m">Drag to spin · Click a piece to open it</span><span class="t">Swipe to spin · Tap a piece to open it</span></p>
+<p class="zi-plat mono"><span>Map key art</span><span>Thumbnails</span><span>3D renders</span><span>Wallpapers</span></p>
 </div>
 </div>
 </div>
 </section>
 
-<!-- CROSSED TAPES -->
-<div class="tapes" aria-hidden="true">
-<div class="tape t2"><div class="tape-in"><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i></div><div class="tape-in"><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i></div></div>
-<div class="tape t1"><div class="tape-in"><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i></div><div class="tape-in"><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i></div></div>
-</div>
+<!-- SHARD STRIP -->
+<section class="shd" aria-label="Highlights">
+<div class="shd-row rv-g"><sc-for list="{{ shards }}" as="sh" hint-placeholder-count="11"><button type="button" class="shd-s" aria-label="Open {{ sh.name }}" onClick="{{ sh.open }}"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"></button></sc-for></div>
+<p class="shd-cue mono" aria-hidden="true"><i></i>Scroll for more<i></i></p>
+</section>
 
 <!-- 01 STATEMENT -->
 <section class="sec stmt" aria-label="What I do">
@@ -632,6 +713,76 @@ a:hover{color:inherit}
 </div>
 </div>
 </section>
+
+<!-- CHAPTERS: WHAT I MAKE -->
+<section id="make" class="chs" aria-label="What I make">
+<article class="ch" aria-labelledby="ch-a">
+<div class="ch-stage">
+<div class="ch-frame"><img class="ch-img" src="images/w18-entity-hunters-lg.webp" alt="Entity Hunters map key art by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Map key art example full size" onClick="{{ ch.a.open }}"></button></div>
+<div class="ch-ui">
+<p class="ch-n mono">Chapter <b>01</b></p>
+<h2 class="ch-t" id="ch-a">Map<span>key art</span></h2>
+<p class="ch-d">The image players see first in Discover. Landscape and portrait key art, lobby backgrounds and update art for your island.</p>
+<div class="ch-row">
+<p class="ch-p"><span class="mono">From</span><b>$125</b></p>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.a.go }}">See prices</a></div>
+</div>
+</div>
+<div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.a.s0 }}" aria-label="Open Heist City"><img src="images/w10-heist-city-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Heist City</span></button><button type="button" class="ch-th" onClick="{{ ch.a.s1 }}" aria-label="Open TQ4 Party Royale"><img src="images/w09-party-royale-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">TQ4 Party Royale</span></button></div>
+</div>
+</article>
+<article class="ch" aria-labelledby="ch-b">
+<div class="ch-stage">
+<div class="ch-frame"><img class="ch-img" src="images/w05-loadouts-lg.webp" alt="Loadouts thumbnail by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View YouTube thumbnails example full size" onClick="{{ ch.b.open }}"></button></div>
+<div class="ch-ui">
+<p class="ch-n mono">Chapter <b>02</b></p>
+<h2 class="ch-t" id="ch-b">YouTube<span>thumbnails</span></h2>
+<p class="ch-d">Thumbnails built to win the click, with A/B versions so you can test which one does.</p>
+<div class="ch-row">
+<p class="ch-p"><span class="mono">From</span><b>$40</b></p>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.b.go }}">See prices</a></div>
+</div>
+</div>
+<div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.b.s0 }}" aria-label="Open Clutch IQ"><img src="images/w16-clutch-iq-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Clutch IQ</span></button><button type="button" class="ch-th" onClick="{{ ch.b.s1 }}" aria-label="Open Hide &amp; Seek"><img src="images/w08-hide-seek-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Hide &amp; Seek</span></button></div>
+</div>
+</article>
+<article class="ch" aria-labelledby="ch-c">
+<div class="ch-stage">
+<div class="ch-frame"><img class="ch-img" src="images/w13-sea-queen-lg.webp" alt="Sea Queen wallpaper by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Wallpapers &amp; renders example full size" onClick="{{ ch.c.open }}"></button></div>
+<div class="ch-ui">
+<p class="ch-n mono">Chapter <b>03</b></p>
+<h2 class="ch-t" id="ch-c">Wallpapers<span>&amp; renders</span></h2>
+<p class="ch-d">High-res wallpapers and 3D renders, starring your own skin or character, for desktop and phone.</p>
+<div class="ch-row">
+<p class="ch-p"><span class="mono">From</span><b>$75</b></p>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.c.go }}">See prices</a></div>
+</div>
+</div>
+<div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.c.s0 }}" aria-label="Open Eclipse"><img src="images/w14-eclipse-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Eclipse</span></button><button type="button" class="ch-th" onClick="{{ ch.c.s1 }}" aria-label="Open Crowd Render"><img src="images/w03-crowd-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Crowd Render</span></button></div>
+</div>
+</article>
+<article class="ch" aria-labelledby="ch-d">
+<div class="ch-stage">
+<div class="ch-frame"><img class="ch-img" src="images/w09-party-royale-lg.webp" alt="TQ4 Party Royale key art by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Launch kits example full size" onClick="{{ ch.d.open }}"></button></div>
+<div class="ch-ui">
+<p class="ch-n mono">Chapter <b>04</b></p>
+<h2 class="ch-t" id="ch-d">Launch<span>kits</span></h2>
+<p class="ch-d">Matching key art, lobby, portrait and update art in one order, for a launch or a whole season.</p>
+<div class="ch-row">
+<p class="ch-p"><span class="mono">From</span><b>$175</b></p>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.d.go }}">See prices</a></div>
+</div>
+</div>
+<div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.d.s0 }}" aria-label="Open Winter Zipline"><img src="images/w11-winter-zipline-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Winter Zipline</span></button><button type="button" class="ch-th" onClick="{{ ch.d.s1 }}" aria-label="Open Duck Squad"><img src="images/w07-duck-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Duck Squad</span></button></div>
+</div>
+</article>
+</section>
+
+<!-- CROSSED TAPES -->
+<div class="tapes" aria-hidden="true">
+<div class="tape t2"><div class="tape-in"><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i></div><div class="tape-in"><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i><span>Rigged in Blender</span><i></i><span>Rendered in EEVEE</span><i></i><span>Finished in Photoshop</span><i></i><span>Crowd Scatter</span><i></i><span>Skin Fusion</span><i></i></div></div>
+<div class="tape t1"><div class="tape-in"><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i></div><div class="tape-in"><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i><span>Map key art</span><i></i><span>Thumbnails</span><i></i><span>3D renders</span><i></i><span>Lobby art</span><i></i><span>Wallpapers</span><i></i><span>Update art</span><i></i><span>Discover banners</span><i></i></div></div>
+</div>
 
 <!-- 02 SELECTED WORK -->
 <section id="work" class="sec wk {{ wkCls }}" aria-label="Selected work">
@@ -860,7 +1011,7 @@ a:hover{color:inherit}
 </template>
 <noscript><p style="color:#F4F1EA;font-family:system-ui,sans-serif;padding:40px">RikoDZN — Fortnite &amp; UEFN key art. This portfolio needs JavaScript. Order at <a style="color:#D9FF3F" href="https://getskystudio.com/shop/riko">getskystudio.com/shop/riko</a>.</p></noscript>
 <script>
-window.__DC_PROPS = {"accent": "#D9FF3F", "accentFont": "Chunky serif"};
+window.__DC_PROPS = {"accent": "#FF5C8A", "accentFont": "Chunky serif"};
 </script>
 <script>
 // Small runtime that renders the portfolio's template and drives its logic class.
@@ -965,15 +1116,30 @@ class Component extends DCLogic {
     }));
     const li = typeof s.lb === 'number' ? s.lb : 0;
     const L = P[li] || P[0];
-    const accent = this.props.accent ?? '#D9FF3F';
+    const accent = this.props.accent ?? '#FF5C8A';
     this._accent = accent;
     const nowP = P[typeof s.cvNow === 'number' ? s.cvNow : this.cvOrder()[0]] || P[0];
     const wi = typeof s.wk === 'number' ? s.wk : 0;
     const WP = P[F.wk[wi].idx] || P[0];
     const wkItems = F.wk.map((w) => ({ name: w.name, src: w.src, sm: w.sm, label: w.label, load: w.load, smLoad: w.smLoad, go: w.go, cls: w.k === wi ? 'on' : '', cur: w.k === wi ? 'true' : 'false', hid: w.k === wi ? 'false' : 'true' }));
     const af = this.props.accentFont ?? 'Chunky serif';
+    if (!this._zx) {
+      const op = (i) => (e) => this.openArt(i, e ? e.currentTarget : null);
+      const tb = (t) => () => this.setState({ tab: t });
+      this._zx = {
+        shards: [14, 2, 7, 3, 15, 9, 10, 1, 17, 0, 13].map((i) => ({ name: P[i].name, src: P[i].lg, open: op(i) })),
+        ch: {
+          a: { open: op(14), s0: op(4), s1: op(12), go: tb('map') },
+          b: { open: op(2), s0: op(9), s1: op(6), go: tb('thumbs') },
+          c: { open: op(15), s0: op(0), s1: op(10), go: tb('walls') },
+          d: { open: op(12), s0: op(7), s1: op(17), go: tb('bundles') }
+        }
+      };
+    }
     return {
-      v2Cls: (s.mo ? 'mo' : '') + (af === 'Classic serif' ? ' af-classic' : (af === 'Brush script' ? ' af-brush' : '')),
+      v2Cls: (s.mo ? 'mo' : '') + (s.zo ? ' zo' : '') + (af === 'Classic serif' ? ' af-classic' : (af === 'Brush script' ? ' af-brush' : '')),
+      shards: this._zx.shards,
+      ch: this._zx.ch,
       wkHintT: s.wkPin ? 'Hold to zoom' : 'Swipe · Hold to zoom',
       wkSkip: (e) => this.wkSkip(e),
       wkItems: wkItems,
@@ -1332,7 +1498,7 @@ class Component extends DCLogic {
     }
     if (c.al < 1) { c.al = Math.min(1, c.al + dt * 1.5); busy = true; }
     if (c.mip) { gl.bindTexture(gl.TEXTURE_2D, c.tex); gl.generateMipmap(gl.TEXTURE_2D); c.mip = false; }
-    const hex = this._accent || '#D9FF3F';
+    const hex = this._accent || '#FF5C8A';
     if (hex !== c.accHex) { c.accHex = hex; c.acc = this.cvHex(hex); }
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
@@ -1837,7 +2003,7 @@ class Component extends DCLogic {
     gl.bindTexture(gl.TEXTURE_2D, ta.t);
     gl.activeTexture(gl.TEXTURE1);
     gl.bindTexture(gl.TEXTURE_2D, tB.t);
-    const hex = this._accent || '#D9FF3F';
+    const hex = this._accent || '#FF5C8A';
     if (hex !== c.accHex) { c.accHex = hex; c.acc = this.cvHex(hex); }
     const ts = t / 1000;
     gl.uniform2f(u.u_res, c.bw, c.bh);
@@ -2156,14 +2322,17 @@ class Component extends DCLogic {
   }
   componentDidMount() {
     if (super.componentDidMount) super.componentDidMount();
-    this._secs = [['work', 'Work'], ['archive', 'Archive'], ['services', 'Services'], ['process', 'Process'], ['about', 'About'], ['faq', 'FAQ'], ['contact', 'Contact']];
+    this._secs = [['make', 'Chapters'], ['work', 'Work'], ['archive', 'Archive'], ['services', 'Services'], ['process', 'Process'], ['about', 'About'], ['faq', 'FAQ'], ['contact', 'Contact']];
     this._onScroll = () => this.navScroll();
     try {
       document.addEventListener('scroll', this._onScroll, { capture: true, passive: true });
       window.addEventListener('resize', this._onScroll, { passive: true });
     } catch (err) {}
     this.navScroll();
-    this._cvT = setTimeout(() => { this._cvT = 0; if (!this._cvTried) this.cvInit(null); }, 120);
+    try {
+      const mq = window.matchMedia && window.matchMedia('(max-height:100000px) and (prefers-reduced-motion: no-preference)');
+      if (mq && mq.matches) this.setState({ zo: true });
+    } catch (err) {}
     this._wkT = setTimeout(() => { this._wkT = 0; if (!this._wkTried) this.wkInit(null); }, 220);
     this._onVis = () => {
       const hid = !!document.hidden;
@@ -2181,6 +2350,8 @@ class Component extends DCLogic {
     try { document.addEventListener('visibilitychange', this._onVis); } catch (err) {}
     try { this.curInit(); } catch (err) {}
     try { this.svcInit(); } catch (err) {}
+    try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!this._dead) this.navScroll(); }); } catch (err) {}
+    this._ziT = setTimeout(() => { this._ziT = 0; this.navScroll(); }, 400);
     this._onAnchor = (e) => this.anchorGo(e);
     try { document.addEventListener('click', this._onAnchor); } catch (err) {}
     this._onRest = () => this.wkRest();
@@ -2264,12 +2435,93 @@ class Component extends DCLogic {
     const rm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     try { sc.scrollTo({ top: id === 'top' ? 0 : y, behavior: rm ? 'auto' : 'smooth' }); } catch (err) { sc.scrollTop = id === 'top' ? 0 : y; }
   }
+  ziOrigin(mask, word, ii) {
+    const fst = document.fonts ? document.fonts.status : 'loaded';
+    const key = word.offsetLeft + ':' + ii.offsetLeft + ':' + ii.offsetWidth + ':' + ii.offsetHeight + ':' + fst;
+    if (this._zKey === key) return;
+    this._zKey = key;
+    let cx = ii.offsetWidth * 0.5;
+    let cy = ii.offsetHeight * 0.52;
+    try {
+      const cs = window.getComputedStyle(ii);
+      const g = document.createElement('canvas').getContext('2d');
+      g.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+      if ('fontStretch' in g) g.fontStretch = 'extra-expanded';
+      const m = g.measureText('I');
+      if (m.actualBoundingBoxRight > 0 && m.fontBoundingBoxAscent > 0) {
+        cx = (m.actualBoundingBoxRight - m.actualBoundingBoxLeft) / 2;
+        const base = (ii.offsetHeight - (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent)) / 2 + m.fontBoundingBoxAscent;
+        cy = base - (m.actualBoundingBoxAscent - m.actualBoundingBoxDescent) / 2;
+      }
+    } catch (err) {}
+    this._zo = [word.offsetLeft + ii.offsetLeft + cx, word.offsetTop + ii.offsetTop + cy, mask.offsetWidth, mask.offsetHeight];
+    mask.style.setProperty('--zox', this._zo[0].toFixed(1) + 'px');
+    mask.style.setProperty('--zoy', this._zo[1].toFixed(1) + 'px');
+  }
+  ziScroll() {
+    const doc = document;
+    const vh = window.innerHeight || 800;
+    const zo = !!(this.state && this.state.zo);
+    const stage = doc.querySelector('.zi-stage');
+    if (stage && zo) {
+      const pin = stage.parentNode;
+      const r = pin.getBoundingClientRect();
+      const total = Math.max(1, r.height - stage.offsetHeight);
+      const p = Math.min(1, Math.max(0, -r.top / total));
+      {
+        this._zp = p;
+        const mask = stage.querySelector('.zi-mask');
+        const word = stage.querySelector('.zi-word');
+        const ii = stage.querySelector('.zi-i');
+        if (mask && word && ii) this.ziOrigin(mask, word, ii);
+        const z = Math.min(1, p / 0.7);
+        const ez = z * z * (3 - 2 * z);
+        const st = stage.style;
+        st.setProperty('--zs', Math.exp(ez * Math.log(70)).toFixed(3));
+        const zo0 = this._zo;
+        if (zo0 && mask) {
+          const pull = Math.min(1, ez * 1.6);
+          mask.style.setProperty('--ztx', ((zo0[2] / 2 - zo0[0]) * pull).toFixed(1) + 'px');
+          mask.style.setProperty('--zty', ((zo0[3] / 2 - zo0[1]) * pull).toFixed(1) + 'px');
+        }
+        st.setProperty('--zmo', Math.min(1, Math.max(0, (1 - z) / 0.12)).toFixed(3));
+        st.setProperty('--zi', (1.32 - ez * 0.28 - Math.max(0, p - 0.7) * 0.06).toFixed(4));
+        st.setProperty('--zco', Math.max(0, 1 - p / 0.08).toFixed(3));
+        const u = Math.min(1, Math.max(0, (p - 0.66) / 0.2));
+        st.setProperty('--zu', (u * u * (3 - 2 * u)).toFixed(3));
+        if (u > 0.2) stage.setAttribute('data-ui', ''); else stage.removeAttribute('data-ui');
+      }
+    }
+    const row = doc.querySelector('.shd-row');
+    if (row) {
+      const r = row.getBoundingClientRect();
+      if (r.bottom > -200 && r.top < vh + 200) {
+        const t = (r.top + r.height / 2 - vh / 2) / vh;
+        row.style.setProperty('--sx', (t * Math.min(260, window.innerWidth * 0.2)).toFixed(1) + 'px');
+      }
+    }
+    const chs = doc.querySelectorAll('.ch');
+    for (let i = 0; i < chs.length; i++) {
+      const el = chs[i];
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -50 || r.top > vh + 50) continue;
+      const cp = Math.min(1, Math.max(0, (vh - r.top) / vh));
+      const cpe = 1 - Math.pow(1 - cp, 3);
+      const span = Math.max(1, r.height - vh);
+      const cq = zo ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+      const cu = Math.min(1, Math.max(0, (cp - 0.55) / 0.35));
+      el.style.setProperty('--cp', cpe.toFixed(4));
+      el.style.setProperty('--cq', cq.toFixed(4));
+      el.style.setProperty('--cu', (cu * cu * (3 - 2 * cu)).toFixed(3));
+    }
+  }
   navScroll() {
     if (!this._hasEnd && this._onRest) this.wkRestSoon();
     if (this._navRaf) return;
     this._navRaf = requestAnimationFrame(() => {
       this._navRaf = 0;
       this.cvScroll();
+      try { this.ziScroll(); } catch (err) {}
       this.wkKick();
       if (this._wkTried && !this._wk) this.wkNoGl();
       const top = document.getElementById('top');
@@ -2300,6 +2552,7 @@ class Component extends DCLogic {
     if (this._cvRt) clearTimeout(this._cvRt);
     if (this._svcIO) { this._svcIO.disconnect(); this._svcIO = null; }
     if (this._moIO) { this._moIO.disconnect(); this._moIO = null; }
+    if (this._ziT) clearTimeout(this._ziT);
     if (this._moScanT) clearTimeout(this._moScanT);
     if (this._wkRestT) clearTimeout(this._wkRestT);
     try {

@@ -62,12 +62,12 @@ a:hover{color:inherit}
 .lab{margin:0 0 18px;color:var(--lab)}
 .lab b{font-weight:500;color:var(--a)}
 .h2{margin:0;font-family:Anybody,sans-serif;font-stretch:125%;font-weight:800;font-size:clamp(44px,7vw,112px);line-height:0.9;letter-spacing:-0.03em;color:var(--ink)}
-.h2 em,.cta-h em,.stmt-t em,.cv-sub em{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:900;font-optical-sizing:auto;letter-spacing:-0.02em;color:var(--a)}
-.af-classic :is(.h2,.cta-h,.stmt-t,.cv-sub) em{font-family:'Playfair Display',Georgia,serif;font-weight:900;letter-spacing:-0.01em}
-.af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub) em{font-family:'Kaushan Script',cursive;font-style:normal;font-weight:400;letter-spacing:0}
-.v2 :is(.h2,.cta-h,.stmt-t,.cv-sub) em{padding:0 0.14em;margin:0 -0.14em;background-image:var(--sun-t);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:shine 9s linear infinite alternate}
+.h2 em,.cta-h em,.stmt-t em,.cv-sub em,.bud-h em{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:900;font-optical-sizing:auto;letter-spacing:-0.02em;color:var(--a)}
+.af-classic :is(.h2,.cta-h,.stmt-t,.cv-sub,.bud-h) em{font-family:'Playfair Display',Georgia,serif;font-weight:900;letter-spacing:-0.01em}
+.af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub,.bud-h) em{font-family:'Kaushan Script',cursive;font-style:normal;font-weight:400;letter-spacing:0}
+.v2 :is(.h2,.cta-h,.stmt-t,.cv-sub,.bud-h) em{padding:0 0.14em;margin:0 -0.14em;background-image:var(--sun-t);background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none;animation:shine 9s linear infinite alternate}
 .v2 :is(.h2,.cta-h,.stmt-t,.cv-sub) em::selection{-webkit-text-fill-color:#07060A}
-.af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub) em{padding:0 0.22em;margin:0 -0.22em;-webkit-text-stroke:0.028em var(--a)}
+.af-brush :is(.h2,.cta-h,.stmt-t,.cv-sub,.bud-h) em{padding:0 0.22em;margin:0 -0.22em;-webkit-text-stroke:0.028em var(--a)}
 .af-brush :is(.h2,.cta-h) em{font-size:1.1em}
 @keyframes shine{0%{background-position:100% 0}100%{background-position:0% 0}}
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;margin-bottom:clamp(36px,5vw,64px)}
@@ -157,6 +157,17 @@ a:hover{color:inherit}
 }
 @media (max-width:760px){.ch-t{font-size:clamp(28px,11.5vw,72px);font-stretch:100%}}
 @media (max-width:900px){.ch-side{display:none}.ch-frame::after{background:linear-gradient(0deg,rgba(7,6,10,0.95) 0%,rgba(7,6,10,0.6) 45%,rgba(7,6,10,0) 75%),radial-gradient(80% 50% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}.ch-img{object-position:var(--mx-pos,60%) 50%}}
+
+
+/* ---------- budget callout ---------- */
+.bud{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px;margin-top:clamp(20px,2.4vw,32px);padding:clamp(26px,3vw,44px);border-radius:28px;overflow:hidden;background:linear-gradient(120deg,rgba(255,181,71,0.12),color-mix(in srgb,var(--a) 14%,transparent) 45%,rgba(155,92,255,0.16));border:1px solid color-mix(in srgb,var(--a) 40%,transparent)}
+.bud::before{content:"";position:absolute;right:-12%;top:-60%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 28%,transparent),transparent);pointer-events:none;animation:glowPulse 6s ease-in-out infinite alternate}
+.bud-t{position:relative;flex:1 1 420px;min-width:0}
+.bud-t .lab{margin-bottom:10px;color:#F4F1EA}
+.bud-h{margin:0;font-family:Anybody,sans-serif;font-stretch:120%;font-weight:800;font-size:clamp(28px,3.4vw,48px);line-height:1;letter-spacing:-0.025em}
+.bud-d{margin:14px 0 0;max-width:600px;color:#DAD6E2}
+.bud-act{position:relative;display:flex;flex-wrap:wrap;gap:12px}
+.ch-act .b-g{min-height:52px}
 
 /* ---------- motion system: scroll reveals (the page script sets data-in) ---------- */
 .w{display:inline-block;clip-path:inset(-0.12em -0.4em -0.26em -0.4em)}
@@ -725,7 +736,7 @@ a:hover{color:inherit}
 <p class="ch-d">The image players see first in Discover. Landscape and portrait key art, lobby backgrounds and update art for your island.</p>
 <div class="ch-row">
 <p class="ch-p"><span class="mono">From</span><b>$125</b></p>
-<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.a.go }}">See prices</a></div>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.a.go }}">See prices</a><a class="b b-g" href="mailto:dznriko061@gmail.com?subject=My%20budget">Name your budget</a></div>
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.a.s0 }}" aria-label="Open Heist City"><img src="images/w10-heist-city-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Heist City</span></button><button type="button" class="ch-th" onClick="{{ ch.a.s1 }}" aria-label="Open TQ4 Party Royale"><img src="images/w09-party-royale-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">TQ4 Party Royale</span></button></div>
@@ -740,7 +751,7 @@ a:hover{color:inherit}
 <p class="ch-d">Thumbnails built to win the click, with A/B versions so you can test which one does.</p>
 <div class="ch-row">
 <p class="ch-p"><span class="mono">From</span><b>$40</b></p>
-<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.b.go }}">See prices</a></div>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.b.go }}">See prices</a><a class="b b-g" href="mailto:dznriko061@gmail.com?subject=My%20budget">Name your budget</a></div>
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.b.s0 }}" aria-label="Open Clutch IQ"><img src="images/w16-clutch-iq-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Clutch IQ</span></button><button type="button" class="ch-th" onClick="{{ ch.b.s1 }}" aria-label="Open Hide &amp; Seek"><img src="images/w08-hide-seek-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Hide &amp; Seek</span></button></div>
@@ -755,7 +766,7 @@ a:hover{color:inherit}
 <p class="ch-d">High-res wallpapers and 3D renders, starring your own skin or character, for desktop and phone.</p>
 <div class="ch-row">
 <p class="ch-p"><span class="mono">From</span><b>$75</b></p>
-<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.c.go }}">See prices</a></div>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.c.go }}">See prices</a><a class="b b-g" href="mailto:dznriko061@gmail.com?subject=My%20budget">Name your budget</a></div>
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.c.s0 }}" aria-label="Open Eclipse"><img src="images/w14-eclipse-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Eclipse</span></button><button type="button" class="ch-th" onClick="{{ ch.c.s1 }}" aria-label="Open Crowd Render"><img src="images/w03-crowd-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Crowd Render</span></button></div>
@@ -770,7 +781,7 @@ a:hover{color:inherit}
 <p class="ch-d">Matching key art, lobby, portrait and update art in one order, for a launch or a whole season.</p>
 <div class="ch-row">
 <p class="ch-p"><span class="mono">From</span><b>$175</b></p>
-<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.d.go }}">See prices</a></div>
+<div class="ch-act"><a class="b b-a" href="#services" onClick="{{ ch.d.go }}">See prices</a><a class="b b-g" href="mailto:dznriko061@gmail.com?subject=My%20budget">Name your budget</a></div>
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.d.s0 }}" aria-label="Open Winter Zipline"><img src="images/w11-winter-zipline-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Winter Zipline</span></button><button type="button" class="ch-th" onClick="{{ ch.d.s1 }}" aria-label="Open Duck Squad"><img src="images/w07-duck-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Duck Squad</span></button></div>
@@ -850,7 +861,7 @@ a:hover{color:inherit}
 <p class="lab mono rv-t"><b>(04)</b> Services</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">The</span></span> <span class="w"><em class="wi" style="--wi: 1">menu</em></span></h2>
 </div>
-<p class="note rv">Prices start here. Order in a few clicks on my Sky shop, or message me for a custom quote.</p>
+<p class="note rv">Prices start here, but they aren't fixed. Order in a few clicks on my Sky shop, or tell me your budget and we'll work something out.</p>
 </div>
 <div class="tabs rv-g"><sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5"><button type="button" class="fp {{ t.cls }}" aria-pressed="{{ t.pressed }}" onClick="{{ t.pick }}">{{ t.label }}<span class="mono">{{ t.n }}</span></button></sc-for></div>
 <div class="cards {{ svcCls }}" data-t="{{ tab }}">
@@ -880,9 +891,20 @@ a:hover{color:inherit}
 </ul>
 </div>
 </div>
+<aside class="bud rv" aria-label="Working with your budget">
+<div class="bud-t">
+<p class="lab mono rv-t">Tight budget?</p>
+<h3 class="bud-h">Tell me your budget. <em>Let&#39;s talk.</em></h3>
+<p class="bud-d">Every price on this page is a starting point, not a wall. Tell me what you need and what you can spend, and we&#39;ll negotiate something that works for both of us.</p>
+</div>
+<div class="bud-act">
+<a class="b b-a mag" href="mailto:dznriko061@gmail.com?subject=My%20budget" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Send me your budget</a>
+<a class="b b-g mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Message me on Sky</a>
+</div>
+</aside>
 <div class="svc-cta rv">
 <a class="b b-a mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Order on Sky <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
-<p class="note">New clients pay 50% upfront. Bigger projects are quoted in chat first.</p>
+<p class="note">New clients pay 50% upfront. Bigger projects are quoted in chat first, and every price is open to talk.</p>
 </div>
 </div>
 </section>
@@ -956,6 +978,7 @@ a:hover{color:inherit}
 <details class="qa"><summary><span class="qa-n mono">04</span><span class="qa-q">What should I send you?</span><span class="qa-x" aria-hidden="true"></span></summary><p class="qa-a">The video or island title, the skins or characters you want, any references, and your deadline. More context means a stronger concept.</p></details>
 <details class="qa"><summary><span class="qa-n mono">05</span><span class="qa-q">Can you make a custom character?</span><span class="qa-x" aria-hidden="true"></span></summary><p class="qa-a">Yes. With Skin Fusion, my own Blender add-on, I can combine parts of different characters into one custom character that's fully rigged and ready to pose.</p></details>
 <details class="qa"><summary><span class="qa-n mono">06</span><span class="qa-q">How does payment work?</span><span class="qa-x" aria-hidden="true"></span></summary><p class="qa-a">New clients pay 50% upfront. Order from my Sky shop, or message me for a custom quote.</p></details>
+<details class="qa"><summary><span class="qa-n mono">07</span><span class="qa-q">Can you work with my budget?</span><span class="qa-x" aria-hidden="true"></span></summary><p class="qa-a">Yes, always. My prices are starting points, not fixed. Tell me your budget and what you need, and we&#39;ll negotiate something that works for both of us. Just <a class="tl" href="mailto:dznriko061@gmail.com?subject=My%20budget">email me</a> or message me on Sky.</p></details>
 </div>
 </div>
 </section>
@@ -971,7 +994,7 @@ a:hover{color:inherit}
 <a class="b b-g b-xl mag" href="#services" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">See prices</a>
 </div>
 <div class="q2">
-<article class="qc rv"><p class="lab mono rv-t">Creators</p><h3>Solo queue</h3><p class="qc-d">Thumbnails from $40, map key art from $125. Pick an item or a plan in my Sky shop and order in a few clicks.</p><a class="b b-g mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Open the shop</a></article>
+<article class="qc rv"><p class="lab mono rv-t">Creators</p><h3>Solo queue</h3><p class="qc-d">Thumbnails from $40, map key art from $125. Pick an item or a plan in my Sky shop and order in a few clicks. On a budget? Tell me and we&#39;ll work it out.</p><a class="b b-g mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Open the shop</a></article>
 <article class="qc rv" style="--d: 120ms"><p class="lab mono rv-t">Studios &amp; map teams</p><h3>Squad queue</h3><p class="qc-d">Island kits from $239, the Season Pack and the monthly plan. Bigger projects are quoted in chat before I start.</p><a class="b b-g mag" href="mailto:dznriko061@gmail.com" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>dznriko061@gmail.com</a></article>
 </div>
 </div>

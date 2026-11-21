@@ -119,7 +119,7 @@ a:hover{color:inherit}
 /* ---------- zoom-through intro + poster ---------- */
 .zi{position:relative;z-index:1}
 .zi-stage{position:relative;height:min(100vh,1000px);min-height:640px;overflow:hidden;background:#07060A;-webkit-user-select:none;user-select:none}
-.zi-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--zi,1.04));transform-origin:50% 45%}
+.zi-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--zi,1.04));transform-origin:50% 45%;will-change:transform}
 .zi-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,6,10,0.7) 0%,rgba(7,6,10,0) 24%,rgba(7,6,10,0) 36%,rgba(30,10,38,0.72) 58%,rgba(7,6,10,0.97) 84%),radial-gradient(90% 60% at 50% 110%,color-mix(in srgb,var(--a) 34%,transparent),transparent 70%)}
 .zi-stage .emb{z-index:2}
 .zi-mask{display:none}
@@ -132,7 +132,7 @@ a:hover{color:inherit}
 @media (max-height:100000px) and (prefers-reduced-motion: no-preference){
 .v2.zo .zi-pin{height:calc(100vh + 230vh)}
 .v2.zo .zi-stage{position:sticky;top:0;height:100vh;min-height:0}
-.v2.zo .zi-mask{display:flex;position:absolute;inset:0;z-index:4;align-items:center;justify-content:center;background:#000;mix-blend-mode:multiply;transform:translate(var(--ztx,0px),var(--zty,0px)) scale(var(--zs,1));transform-origin:var(--zox,50%) var(--zoy,50%);opacity:var(--zmo,1);pointer-events:none}
+.v2.zo .zi-mask{display:flex;position:absolute;inset:0;z-index:4;will-change:transform,opacity;align-items:center;justify-content:center;background:#000;mix-blend-mode:multiply;transform:translate(var(--ztx,0px),var(--zty,0px)) scale(var(--zs,1));transform-origin:var(--zox,50%) var(--zoy,50%);opacity:var(--zmo,1);pointer-events:none}
 .v2.zo .zi-cue{display:flex;position:absolute;left:0;right:0;bottom:clamp(26px,5vh,54px);z-index:5;flex-direction:column;align-items:center;gap:12px;margin:0;color:#E6E3EC;opacity:var(--zco,1);pointer-events:none}
 .v2.zo .zi-cue i{display:block;width:1.5px;height:46px;background:linear-gradient(180deg,var(--a),transparent);animation:cueDrop 1.8s ease-in-out infinite}
 .v2.zo .zi-ui{opacity:var(--zu,0);transform:translateY(calc((1 - var(--zu,0)) * 44px));filter:blur(calc((1 - var(--zu,0)) * 10px))}
@@ -337,8 +337,9 @@ a:hover{color:inherit}
 .ch{position:relative}
 .ch + .ch{margin-top:clamp(18px,2vw,30px)}
 .ch-stage{position:relative;height:min(100vh,900px);min-height:620px;overflow:hidden}
-.ch-frame{position:absolute;inset:0;overflow:hidden;clip-path:inset(calc((1 - var(--cp,1)) * 14%) calc((1 - var(--cp,1)) * 10%) round calc((1 - var(--cp,1)) * 44px + 0px));background:#0E0C14}
-.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:translate(calc(var(--cq,0) * -2.2%),calc(var(--cq,0) * -1.4%)) scale(calc(1.2 - var(--cp,1) * 0.12 + var(--cq,0) * 0.12));transform-origin:60% 45%;animation:camDrift 26s ease-in-out infinite alternate}
+.ch-frame{position:absolute;inset:0;overflow:hidden;background:#0E0C14;transform:scale(calc(0.8 + var(--cp,1) * 0.2));opacity:calc(0.35 + var(--cp,1) * 0.65);border-radius:28px;will-change:transform}
+.ch[data-full] .ch-frame{border-radius:0}
+.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:translate(calc(var(--cq,0) * -2.2%),calc(var(--cq,0) * -1.4%)) scale(calc(1.2 - var(--cp,1) * 0.12 + var(--cq,0) * 0.12));transform-origin:60% 45%;animation:camDrift 26s ease-in-out infinite alternate}
 .ch-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,6,10,0.9) 0%,rgba(7,6,10,0.55) 36%,rgba(7,6,10,0) 62%),linear-gradient(0deg,rgba(7,6,10,0.85) 0%,rgba(7,6,10,0) 40%),radial-gradient(70% 60% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}
 .ch-ui{position:absolute;left:0;bottom:0;z-index:2;width:min(900px,100%);padding:0 clamp(20px,4.5vw,72px) clamp(36px,7vh,80px);opacity:var(--cu,1);transform:translateY(calc((1 - var(--cu,1)) * 50px))}
 .ch-n{display:inline-flex;align-items:center;gap:12px;margin:0 0 14px;color:#F4F1EA}
@@ -1429,7 +1430,7 @@ class Component extends DCLogic {
       const op = (i) => (e) => this.openArt(i, e ? e.currentTarget : null);
       const tb = (t) => () => this.setState({ tab: t });
       this._zx = {
-        shards: [14, 2, 7, 3, 15, 9, 10, 1, 17, 0, 13].map((i) => ({ name: P[i].name, cat: P[i].cat, src: P[i].lg, open: op(i) })),
+        shards: [14, 2, 7, 3, 15, 9, 10, 1, 17, 0, 13].map((i) => ({ name: P[i].name, cat: P[i].cat, src: P[i].sm, open: op(i) })),
         ch: {
           a: { open: op(14), s0: op(4), s1: op(12), go: tb('map') },
           b: { open: op(2), s0: op(9), s1: op(6), go: tb('thumbs') },
@@ -3104,13 +3105,16 @@ class Component extends DCLogic {
     const doc = document;
     const vh = window.innerHeight || 800;
     const zo = !!(this.state && this.state.zo);
-    const stage = doc.querySelector('.zi-stage');
+    const stage = this._ziStage || (this._ziStage = doc.querySelector('.zi-stage'));
+    const chs = this._chEls || (this._chEls = [].slice.call(doc.querySelectorAll('.ch')));
+    const rects = chs.map((el) => el.getBoundingClientRect());
     if (stage && zo) {
       const pin = stage.parentNode;
       const r = pin.getBoundingClientRect();
       const total = Math.max(1, r.height - stage.offsetHeight);
       const p = Math.min(1, Math.max(0, -r.top / total));
-      {
+      if (p !== this._zpW) {
+        this._zpW = p;
         this._zp = p;
         const mask = stage.querySelector('.zi-mask');
         const word = stage.querySelector('.zi-word');
@@ -3134,24 +3138,25 @@ class Component extends DCLogic {
         if (u > 0.2) stage.setAttribute('data-ui', ''); else stage.removeAttribute('data-ui');
       }
     }
-    const chs = doc.querySelectorAll('.ch');
+    const cache = this._chV || (this._chV = []);
     for (let i = 0; i < chs.length; i++) {
-      const el = chs[i];
-      const r = el.getBoundingClientRect();
+      const el = chs[i], r = rects[i];
       if (r.bottom < -50 || r.top > vh + 50) continue;
       const cp = Math.min(1, Math.max(0, (vh - r.top) / vh));
       const cpe = 1 - Math.pow(1 - cp, 3);
       const span = Math.max(1, r.height - vh);
       const cq = zo ? Math.min(1, Math.max(0, -r.top / span)) : 0;
       const cu = Math.min(1, Math.max(0, (cp - 0.55) / 0.35));
-      el.style.setProperty('--cp', cpe.toFixed(4));
-      el.style.setProperty('--cq', cq.toFixed(4));
-      el.style.setProperty('--cu', (cu * cu * (3 - 2 * cu)).toFixed(3));
       const lbIn = Math.min(1, Math.max(0, (cp - 0.92) / 0.08));
       const lb = zo ? lbIn : 0;
-      el.style.setProperty('--lb', (lb * lb * (3 - 2 * lb)).toFixed(3));
       const bk = zo && i < chs.length - 1 ? Math.min(1, Math.max(0, (cq - 0.8) / 0.2)) : 0;
-      el.style.setProperty('--blk', bk.toFixed(3));
+      const v = [cpe.toFixed(3), cq.toFixed(3), (cu * cu * (3 - 2 * cu)).toFixed(3), (lb * lb * (3 - 2 * lb)).toFixed(3), bk.toFixed(3)];
+      const old = cache[i] || [];
+      const names = ['--cp', '--cq', '--cu', '--lb', '--blk'];
+      for (let k = 0; k < 5; k++) if (old[k] !== v[k]) el.style.setProperty(names[k], v[k]);
+      cache[i] = v;
+      const full = cpe >= 0.999;
+      if (full !== !!el.__full) { el.__full = full; if (full) el.setAttribute('data-full', ''); else el.removeAttribute('data-full'); }
     }
   }
   navScroll() {

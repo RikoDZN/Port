@@ -125,6 +125,43 @@ a:hover{color:inherit}
 .shd-cue i{display:block;width:40px;height:1.5px;background:var(--sun)}
 @media (max-width:760px){.shd-s{width:96px;height:min(56vh,380px);margin-left:-20px}.shd-s:hover{width:96px}}
 
+
+/* ---------- shard strip, upgraded ---------- */
+.shd-bg{position:absolute;left:0;right:0;top:50%;z-index:0;translate:0 -58%;display:flex;flex-direction:column;gap:clamp(6px,1vw,14px);pointer-events:none;opacity:0.9}
+.shd-word{display:flex;width:max-content;margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:clamp(56px,9vw,150px);line-height:0.95;letter-spacing:-0.03em;text-transform:uppercase;white-space:nowrap;color:transparent;-webkit-text-stroke:1.2px rgba(244,241,234,0.14)}
+.shd-word span{padding-right:0.3em}
+.shd-word.a{transform:translateX(calc(var(--sx,0px) * -1.6 - 8%));animation:shdW 70s linear infinite}
+.shd-word.b{transform:translateX(calc(var(--sx,0px) * 1.2 - 30%));animation:shdW 90s linear infinite reverse;-webkit-text-stroke-color:color-mix(in srgb,var(--a) 30%,transparent)}
+@keyframes shdW{to{translate:-50% 0}}
+.shd-glow{position:absolute;left:50%;top:48%;z-index:0;width:min(1100px,90vw);height:60%;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 22%,transparent),rgba(155,92,255,0.1) 55%,transparent);filter:blur(10px);pointer-events:none;animation:glowPulse 7s ease-in-out infinite alternate}
+.shd-row{position:relative;z-index:1}
+.shd-s{animation:shdFloat 7s ease-in-out infinite;animation-delay:calc(var(--k,0) * -0.7s)}
+.shd-s:nth-child(1){--k:0;--fx:-60px;--fy:-90px;--fr:-14deg}.shd-s:nth-child(2){--k:1;--fx:40px;--fy:120px;--fr:10deg}.shd-s:nth-child(3){--k:2;--fx:-30px;--fy:-140px;--fr:16deg}.shd-s:nth-child(4){--k:3;--fx:50px;--fy:100px;--fr:-12deg}.shd-s:nth-child(5){--k:4;--fx:-20px;--fy:-120px;--fr:8deg}.shd-s:nth-child(6){--k:5;--fx:30px;--fy:140px;--fr:-16deg}.shd-s:nth-child(7){--k:6;--fx:-40px;--fy:-100px;--fr:12deg}.shd-s:nth-child(8){--k:7;--fx:20px;--fy:130px;--fr:-9deg}.shd-s:nth-child(9){--k:8;--fx:-50px;--fy:-110px;--fr:14deg}.shd-s:nth-child(10){--k:9;--fx:40px;--fy:90px;--fr:-13deg}.shd-s:nth-child(11){--k:10;--fx:60px;--fy:-130px;--fr:11deg}
+@keyframes shdFloat{0%,100%{translate:0 var(--oy,0)}50%{translate:0 calc(var(--oy,0) + 14px)}}
+.v2.mo .shd-row.rv-g:not([data-in]) > *{opacity:0}
+.v2.mo .shd-row.rv-g[data-in] > .shd-s{animation:shdIn 1.25s cubic-bezier(0.16,1,0.3,1) calc(var(--k,0) * 65ms) backwards,shdFloat 7s ease-in-out calc(1.4s + var(--k,0) * -0.7s) infinite}
+@keyframes shdIn{from{opacity:0;transform:translate(var(--fx),var(--fy)) rotate(var(--fr)) scale(0.8);filter:blur(10px) brightness(2)}}
+.shd-row:hover .shd-s:not(:hover){filter:saturate(0.6) brightness(0.5)}
+.shd-s img{filter:none}
+.shd-cap{position:absolute;left:30%;right:8%;bottom:14px;z-index:2;display:flex;flex-direction:column;gap:4px;text-align:left;opacity:0;transform:translateY(14px);transition:opacity 0.35s,transform 0.5s var(--ease);pointer-events:none}
+.shd-cap b{font-family:Anybody,sans-serif;font-stretch:115%;font-weight:800;font-size:clamp(14px,1.2vw,18px);line-height:1.05;color:#FFFFFF;text-shadow:0 2px 14px rgba(0,0,0,0.8)}
+.shd-cap i{font-style:normal;font-size:9.5px;color:#F4F1EA;opacity:0.85}
+.shd-s:hover .shd-cap,.shd-s:focus-visible .shd-cap{opacity:1;transform:none;transition-delay:0.15s}
+.shd-s::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,236,214,0.45) 50%,transparent 65%);background-size:300% 100%;background-position:120% 0;mix-blend-mode:soft-light;animation:shdSweep 9s ease-in-out infinite;animation-delay:calc(var(--k,0) * 0.18s)}
+@keyframes shdSweep{0%,62%{background-position:120% 0}88%,100%{background-position:-20% 0}}
+.shd-cue{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 26px;margin:clamp(30px,3.4vw,50px) 0 0}
+.shd-n{color:#F4F1EA}
+.shd-n b{font-family:Anybody,sans-serif;font-stretch:125%;font-weight:800;font-size:22px;letter-spacing:-0.02em;margin-right:6px;background:var(--sun);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;vertical-align:-2px}
+.shd-m{color:var(--lab)}
+.shd-ch{display:inline-flex;flex-direction:column;align-items:center;gap:0}
+.shd-ch i{display:block;width:12px;height:12px;margin-top:-5px;border-right:2px solid var(--a);border-bottom:2px solid var(--a);rotate:45deg;opacity:0;animation:chev 1.8s ease-in-out infinite}
+.shd-ch i:nth-child(2){animation-delay:0.2s}.shd-ch i:nth-child(3){animation-delay:0.4s}
+@keyframes chev{0%{opacity:0;translate:0 -6px}40%{opacity:1}80%,100%{opacity:0;translate:0 6px}}
+.shd-all{position:relative;padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.04);color:#F4F1EA;text-decoration:none;transition:border-color 0.3s,color 0.3s}
+.shd-all:hover{border-color:var(--a);color:#FFFFFF}
+@media (max-width:760px){.shd-word{font-size:clamp(44px,15vw,80px)}.shd-cap{display:none}.shd-cue{gap:12px 18px}}
+@media (prefers-reduced-motion: reduce){.shd-word.a,.shd-word.b{transform:none}}
+
 /* ---------- full-screen chapters ---------- */
 .chs{position:relative;z-index:2}
 .ch{position:relative}
@@ -738,8 +775,10 @@ a:hover{color:inherit}
 
 <!-- SHARD STRIP -->
 <section class="shd" aria-label="Highlights">
-<div class="shd-row rv-g"><sc-for list="{{ shards }}" as="sh" hint-placeholder-count="11"><button type="button" class="shd-s" aria-label="Open {{ sh.name }}" onClick="{{ sh.open }}"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"></button></sc-for></div>
-<p class="shd-cue mono" aria-hidden="true"><i></i>Scroll for more<i></i></p>
+<div class="shd-bg" aria-hidden="true"><p class="shd-word a"><span>Key art · Thumbnails · 3D renders · Wallpapers · </span><span>Key art · Thumbnails · 3D renders · Wallpapers · </span></p><p class="shd-word b"><span>Win the click · Win the play · Win the follow · </span><span>Win the click · Win the play · Win the follow · </span></p></div>
+<div class="shd-glow" aria-hidden="true"></div>
+<div class="shd-row rv-g"><sc-for list="{{ shards }}" as="sh" hint-placeholder-count="11"><button type="button" class="shd-s" aria-label="Open {{ sh.name }}" onClick="{{ sh.open }}"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"><span class="shd-cap" aria-hidden="true"><b>{{ sh.name }}</b><i class="mono">{{ sh.cat }}</i></span></button></sc-for></div>
+<div class="shd-cue" aria-hidden="true"><span class="shd-n mono"><b>18</b> pieces</span><span class="shd-m mono">Scroll for more</span><span class="shd-ch"><i></i><i></i><i></i></span><a class="shd-all mono" href="#archive">See them all</a></div>
 </section>
 
 <!-- 01 STATEMENT -->
@@ -1185,7 +1224,7 @@ class Component extends DCLogic {
       const op = (i) => (e) => this.openArt(i, e ? e.currentTarget : null);
       const tb = (t) => () => this.setState({ tab: t });
       this._zx = {
-        shards: [14, 2, 7, 3, 15, 9, 10, 1, 17, 0, 13].map((i) => ({ name: P[i].name, src: P[i].lg, open: op(i) })),
+        shards: [14, 2, 7, 3, 15, 9, 10, 1, 17, 0, 13].map((i) => ({ name: P[i].name, cat: P[i].cat, src: P[i].lg, open: op(i) })),
         ch: {
           a: { open: op(14), s0: op(4), s1: op(12), go: tb('map') },
           b: { open: op(2), s0: op(9), s1: op(6), go: tb('thumbs') },

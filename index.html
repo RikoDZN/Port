@@ -111,7 +111,8 @@ a:hover{color:inherit}
 .ld:not([data-ld="done"]) ~ .zi .zi-word{transform:scale(0.55);filter:blur(14px);opacity:0}
 .ld[data-ld="out"] ~ .zi .zi-word{transform:none;filter:none;opacity:1;transition:transform 1.5s cubic-bezier(0.16,1,0.3,1) 0.65s,filter 1.1s ease 0.65s,opacity 0.8s ease 0.65s}
 .ld:not([data-ld="done"]) ~ .zi :is(.zi-echo,.zi-rf2,.zi-floor,.zi-flare){opacity:0 !important}
-.zi :is(.zi-echo,.zi-rf2,.zi-floor){transition:opacity 1.2s ease}
+.ld[data-ld="done"] ~ .zi :is(.zi-rf2,.zi-floor){animation:ziFadeIn 1.2s ease both}
+@keyframes ziFadeIn{from{opacity:0}}
 
 }
 
@@ -125,9 +126,9 @@ a:hover{color:inherit}
 .zi-cue{display:none}
 .zi-ui{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,1.8vh,22px);padding:0 20px clamp(30px,6vh,64px);text-align:center}
 .zi-ui .cv-h{font-size:clamp(52px,min(10.4vw,17vh),176px)}
-.zi-plat{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:4px 0 0;color:#CFCBD8}
-.zi-plat span{display:inline-flex;align-items:center;gap:22px}
-.zi-plat span + span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--sun);margin-left:-22px;margin-right:0;position:relative;left:-9px}
+.zi-plat{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 0;margin:4px 0 0;color:#CFCBD8}
+.zi-plat span{display:inline-flex;align-items:center}
+.zi-plat span + span::before{content:"";display:inline-block;flex:none;width:4px;height:4px;margin:0 16px;border-radius:50%;background:var(--sun)}
 @media (max-height:100000px) and (prefers-reduced-motion: no-preference){
 .v2.zo .zi-pin{height:calc(100vh + 230vh)}
 .v2.zo .zi-stage{position:sticky;top:0;height:100vh;min-height:0}
@@ -145,7 +146,7 @@ a:hover{color:inherit}
 .zi-top{position:absolute;left:0;right:0;top:clamp(92px,13vh,140px);z-index:5;display:flex;justify-content:center;pointer-events:none}
 .v2:not(.zo) .zi-top{display:none}
 @keyframes cueDrop{0%{transform:scaleY(0);transform-origin:50% 0}45%{transform:scaleY(1);transform-origin:50% 0}55%{transform:scaleY(1);transform-origin:50% 100%}100%{transform:scaleY(0);transform-origin:50% 100%}}
-@media (max-width:760px){.zi-img{object-position:46% 40%}.zi-word{font-size:min(13.6vw,24vh)}.zi-ui .cv-h{font-size:clamp(46px,15vw,92px)}.zi-plat{gap:8px 18px;font-size:10px}}
+@media (max-width:760px){.zi-img{object-position:46% 40%}.zi-word{font-size:min(13.6vw,24vh)}.zi-ui .cv-h{font-size:clamp(46px,15vw,92px)}.zi-plat{gap:8px 0;font-size:9.5px;letter-spacing:0.06em;flex-wrap:nowrap;white-space:nowrap}.zi-plat span + span::before{margin:0 8px;width:3px;height:3px}}
 
 
 /* ---------- intro screen: atmosphere ---------- */
@@ -1263,7 +1264,7 @@ a:hover{color:inherit}
 
 <!-- 08 CALL TO ACTION -->
 <section id="contact" class="sec cta" aria-label="Order">
-<div class="emb" aria-hidden="true"><i style="--x: 4%; --s: 4px; --t: 14s; --dl: -3s; --dx: 22px"></i><i style="--x: 11%; --s: 3px; --t: 18s; --dl: -10s; --dx: -18px; --o: 0.5"></i><i style="--x: 19%; --s: 5px; --t: 16s; --dl: -6s; --dx: 18px"></i><i style="--x: 28%; --s: 3px; --t: 20s; --dl: -15s; --dx: -22px; --o: 0.5"></i><i style="--x: 37%; --s: 4px; --t: 15s; --dl: -1s; --dx: 14px; --o: 0.6"></i><i style="--x: 48%; --s: 3px; --t: 19s; --dl: -8s; --dx: -16px; --o: 0.5"></i><i style="--x: 58%; --s: 5px; --t: 17s; --dl: -12s; --dx: 20px"></i><i style="--x: 67%; --s: 3px; --t: 21s; --dl: -5s; --dx: -20px; --o: 0.55"></i><i style="--x: 76%; --s: 4px; --t: 14s; --dl: -9s; --dx: 16px"></i><i style="--x: 85%; --s: 3px; --t: 18s; --dl: -2s; --dx: -18px; --o: 0.5"></i><i style="--x: 93%; --s: 5px; --t: 16s; --dl: -13s; --dx: -12px"></i></div>
+<div class="emb" aria-hidden="true"><i style="--x: 4%; --s: 4px; --t: 14s; --dl: -3s; --dx: 22px"></i><i style="--x: 19%; --s: 5px; --t: 16s; --dl: -6s; --dx: 18px"></i><i style="--x: 37%; --s: 4px; --t: 15s; --dl: -1s; --dx: 14px; --o: 0.6"></i><i style="--x: 58%; --s: 5px; --t: 17s; --dl: -12s; --dx: 20px"></i><i style="--x: 76%; --s: 4px; --t: 14s; --dl: -9s; --dx: 16px"></i><i style="--x: 93%; --s: 5px; --t: 16s; --dl: -13s; --dx: -12px"></i></div>
 <div class="wrap">
 <p class="lab mono rv-t scr"><b>(08)</b> Ready when you are</p>
 <h2 class="cta-h rv-h"><span class="w"><span class="wi">Give</span></span> <span class="w"><span class="wi" style="--wi: 1">your</span></span> <span class="w"><span class="wi" style="--wi: 2">map</span></span> <span class="w"><span class="wi" style="--wi: 3">the</span></span> <span class="w"><span class="wi" style="--wi: 4">art</span></span> <span class="w"><span class="wi" style="--wi: 5">it</span></span> <span class="w"><em class="wi" style="--wi: 6">deserves.</em></span></h2>

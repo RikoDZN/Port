@@ -76,6 +76,39 @@ a:hover{color:inherit}
 .tl:hover{color:var(--a)}
 
 
+
+/* ---------- load-in intro ---------- */
+.ld{display:none}
+@media (max-height:100000px) and (prefers-reduced-motion: no-preference){
+.ld{display:block;position:fixed;inset:0;z-index:200;isolation:isolate;background:#07060A;transition:background-color 0.3s 0.3s;pointer-events:auto;animation:ldFail 0.01s linear 6s forwards}
+.ld[data-ld="done"]{display:none}
+}
+@keyframes ldFail{to{opacity:0;visibility:hidden;pointer-events:none}}
+.ld-door{position:absolute;left:0;right:0;height:50.5%;background:#07060A;transition:transform 1s cubic-bezier(0.7,0,0.2,1)}
+.ld-door.t{top:0;box-shadow:0 1px 0 rgba(255,255,255,0.03)}
+.ld-door.b{bottom:0}
+.ld-door.t::after,.ld-door.b::before{content:"";position:absolute;left:0;right:0;height:2px;background:var(--sun);opacity:0;transform:scaleX(0);transition:opacity 0.3s,transform 0.5s var(--ease)}
+.ld-door.t::after{bottom:-1px}
+.ld-door.b::before{top:-1px}
+.ld[data-ld="out"] .ld-door.t::after,.ld[data-ld="out"] .ld-door.b::before{opacity:1;transform:scaleX(1)}
+.ld[data-ld="out"] .ld-door.t{transform:translateY(-101%);transition-delay:0.35s}
+.ld[data-ld="out"] .ld-door.b{transform:translateY(101%);transition-delay:0.35s}
+.ld[data-ld="out"]{pointer-events:none;background-color:transparent}
+.ld-c{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(16px,2.4vh,26px);padding:0 24px;transition:opacity 0.45s,transform 0.8s cubic-bezier(0.7,0,0.2,1),filter 0.45s}
+.ld[data-ld="out"] .ld-c{opacity:0;transform:scale(1.18);filter:blur(10px)}
+.ld-tag{margin:0;color:var(--lab);opacity:0;animation:heroUp 0.8s var(--ease) 0.15s forwards}
+.ld-w{position:relative}
+.ld-word{margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:min(13vw,22vh);line-height:0.9;letter-spacing:-0.04em;white-space:nowrap}
+.ld-word.o{color:transparent;-webkit-text-stroke:1.5px rgba(244,241,234,0.3);clip-path:inset(0 calc(100% - var(--ld-draw,0%)) 0 0);animation:ldDraw 0.9s cubic-bezier(0.6,0,0.2,1) forwards}
+.ld-word.f{position:absolute;inset:0;background:var(--sun-t);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;clip-path:inset(0 calc(100% - var(--lp,0) * 100%) 0 0);animation:shine 4s linear infinite alternate}
+@property --ld-draw{syntax:'<percentage>';inherits:false;initial-value:0%}
+@keyframes ldDraw{to{--ld-draw:100%}}
+.ld-bar{position:relative;width:min(560px,70vw);height:2px;border-radius:2px;background:rgba(255,255,255,0.1);overflow:hidden}
+.ld-bar i{position:absolute;inset:0;background:var(--sun);transform-origin:0 50%;transform:scaleX(var(--lp,0))}
+.ld-row{display:flex;justify-content:space-between;width:min(560px,70vw);color:var(--lab)}
+.ld-n{color:#F4F1EA;font-variant-numeric:tabular-nums}
+.ld-n::after{content:"%";color:var(--lab);margin-left:2px}
+
 /* ---------- zoom-through intro + poster ---------- */
 .zi{position:relative;z-index:1}
 .zi-stage{position:relative;height:min(100vh,1000px);min-height:640px;overflow:hidden;background:#07060A;-webkit-user-select:none;user-select:none}
@@ -714,6 +747,16 @@ a:hover{color:inherit}
 <div class="v2 {{ v2Cls }}" style="--a: {{accent}}">
 
 <div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
+<!-- LOAD-IN INTRO -->
+<div class="ld" aria-hidden="true">
+<div class="ld-door t"></div><div class="ld-door b"></div>
+<div class="ld-c">
+<p class="ld-tag mono">Fortnite &amp; UEFN key art</p>
+<div class="ld-w"><p class="ld-word o">RIKODZN</p><p class="ld-word f">RIKODZN</p></div>
+<div class="ld-bar"><i></i></div>
+<div class="ld-row mono"><span>Loading the work</span><span class="ld-n">000</span></div>
+</div>
+</div>
 <svg class="grain" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><filter id="v2-grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter><rect width="100%" height="100%" filter="url(#v2-grain)"></rect></svg>
 
 <!-- DYNAMIC ISLAND NAV -->
@@ -2510,6 +2553,45 @@ class Component extends DCLogic {
       ['touchstart', 'touchend', 'touchcancel'].forEach((n) => document.addEventListener(n, this._onTouch, { capture: true, passive: true }));
     } catch (err) {}
     try { this.motionInit(); } catch (err) {}
+    try { this.ldInit(); } catch (err) {}
+  }
+  ldInit() {
+    const el = document.querySelector('.ld');
+    if (!el || window.getComputedStyle(el).display === 'none') return;
+    const t0 = performance.now();
+    const MIN = 1500, MAX = 3200;
+    const imgs = [].slice.call(document.querySelectorAll('.zi-img'));
+    let fontsOk = !document.fonts;
+    try { if (document.fonts) document.fonts.ready.then(() => { fontsOk = true; }); } catch (err) { fontsOk = true; }
+    const n = el.querySelector('.ld-n');
+    let shown = 0, done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      el.style.setProperty('--lp', '1');
+      if (n) n.textContent = '100';
+      this._ldOut = setTimeout(() => {
+        el.setAttribute('data-ld', 'out');
+        this._ldDone = setTimeout(() => { el.setAttribute('data-ld', 'done'); }, 1500);
+      }, 220);
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => window.removeEventListener(ev, this._ldSkip));
+    };
+    this._ldSkip = () => finish();
+    ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => window.addEventListener(ev, this._ldSkip, { passive: true }));
+    const tick = (now) => {
+      if (done || this._dead) return;
+      const el2 = now - t0;
+      const loaded = imgs.length ? imgs.filter((i) => i.complete && i.naturalWidth > 0).length / imgs.length : 1;
+      const ready = (fontsOk ? 0.4 : 0) + loaded * 0.6;
+      const timeP = Math.min(1, el2 / MIN);
+      const target = Math.min(timeP, 0.15 + ready * 0.85, el2 >= MAX ? 1 : 0.999);
+      shown += (target - shown) * 0.12;
+      if (el2 >= MAX || (timeP >= 1 && ready >= 1 && shown > 0.985)) { finish(); return; }
+      el.style.setProperty('--lp', shown.toFixed(4));
+      if (n) n.textContent = String(Math.round(shown * 100)).padStart(3, '0');
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   }
   motionInit() {
     const win = window;
@@ -2704,6 +2786,9 @@ class Component extends DCLogic {
     if (this._svcIO) { this._svcIO.disconnect(); this._svcIO = null; }
     if (this._moIO) { this._moIO.disconnect(); this._moIO = null; }
     if (this._ziT) clearTimeout(this._ziT);
+    if (this._ldOut) clearTimeout(this._ldOut);
+    if (this._ldDone) clearTimeout(this._ldDone);
+    if (this._ldSkip) ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => window.removeEventListener(ev, this._ldSkip));
     if (this._moScanT) clearTimeout(this._moScanT);
     if (this._wkRestT) clearTimeout(this._wkRestT);
     try {

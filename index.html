@@ -141,6 +141,33 @@ a:hover{color:inherit}
 @keyframes cueDrop{0%{transform:scaleY(0);transform-origin:50% 0}45%{transform:scaleY(1);transform-origin:50% 0}55%{transform:scaleY(1);transform-origin:50% 100%}100%{transform:scaleY(0);transform-origin:50% 100%}}
 @media (max-width:760px){.zi-img{object-position:24% 40%}.zi-word{font-size:min(13.6vw,24vh)}.zi-ui .cv-h{font-size:clamp(46px,15vw,92px)}.zi-plat{gap:8px 18px;font-size:10px}}
 
+
+/* ---------- intro screen: atmosphere ---------- */
+.v2.zo .zi-mask{background:radial-gradient(ellipse 75% 70% at 50% 52%,rgb(30,26,34) 0%,rgb(14,12,17) 55%,rgb(3,3,4) 100%)}
+.zi-beam,.zi-spot{position:absolute;pointer-events:none}
+.zi-beam{top:-30%;bottom:-30%;left:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4) 50%,transparent);filter:blur(30px);transform:translateX(-140%) skewX(-18deg);animation:ziBeam 9s cubic-bezier(0.55,0,0.35,1) 1.2s infinite}
+@keyframes ziBeam{0%{transform:translateX(-140%) skewX(-18deg)}55%,100%{transform:translateX(420%) skewX(-18deg)}}
+.zi-spot{left:var(--fx,50%);top:var(--fy,50%);width:min(560px,42vw);aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,0.75),rgba(255,255,255,0.25) 45%,transparent);opacity:0;transition:opacity 0.5s}
+.zi-mask[data-lit] .zi-spot{opacity:1}
+.zi-rf{position:absolute;left:0;right:0;top:100%;display:block;margin-top:0.04em;transform:scaleY(-1);transform-origin:50% 0;color:#FFFFFF;opacity:0.65;-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,0.9),transparent 60%);mask-image:linear-gradient(0deg,rgba(0,0,0,0.9),transparent 60%);filter:blur(1.5px);pointer-events:none;letter-spacing:inherit}
+.zi-hud{display:none}
+@media (max-height:100000px) and (prefers-reduced-motion: no-preference){
+.v2.zo .zi-hud{display:block;position:absolute;inset:0;z-index:5;pointer-events:none;opacity:var(--zco,1)}
+}
+.zi-hud .c{position:absolute;width:34px;height:34px;border-color:rgba(244,241,234,0.55);border-style:solid;border-width:0}
+.zi-hud .c.tl{left:clamp(18px,2.4vw,40px);top:clamp(96px,12vh,124px);border-left-width:1.5px;border-top-width:1.5px}
+.zi-hud .c.tr{right:clamp(18px,2.4vw,40px);top:clamp(96px,12vh,124px);border-right-width:1.5px;border-top-width:1.5px}
+.zi-hud .c.bl{left:clamp(18px,2.4vw,40px);bottom:clamp(22px,3vh,40px);border-left-width:1.5px;border-bottom-width:1.5px}
+.zi-hud .c.br{right:clamp(18px,2.4vw,40px);bottom:clamp(22px,3vh,40px);border-right-width:1.5px;border-bottom-width:1.5px}
+.zi-hud .h{position:absolute;margin:0;display:flex;align-items:center;gap:10px;font-size:10.5px;color:rgba(244,241,234,0.7)}
+.zi-hud .h.tl{left:calc(clamp(18px,2.4vw,40px) + 48px);top:calc(clamp(96px,12vh,124px) + 10px)}
+.zi-hud .h.tr{right:calc(clamp(18px,2.4vw,40px) + 48px);top:calc(clamp(96px,12vh,124px) + 10px)}
+.zi-hud .h.bl{left:calc(clamp(18px,2.4vw,40px) + 48px);bottom:calc(clamp(22px,3vh,40px) + 10px)}
+.zi-hud .h.br{right:calc(clamp(18px,2.4vw,40px) + 48px);bottom:calc(clamp(22px,3vh,40px) + 10px)}
+.zi-hud .rec{width:8px;height:8px;border-radius:50%;background:#FF3B5C;box-shadow:0 0 10px #FF3B5C;animation:recBlink 1.6s steps(1) infinite}
+@keyframes recBlink{50%{opacity:0.15}}
+@media (max-width:900px){.zi-hud .h{display:none}}
+
 /* ---------- shard strip ---------- */
 .shd{position:relative;z-index:2;padding:clamp(70px,9vw,130px) 0 clamp(30px,4vw,60px);overflow:hidden}
 .shd-row{display:flex;justify-content:center;align-items:center;width:max-content;margin:0 auto;padding:0 6vw;transform:translateX(var(--sx,0px))}
@@ -796,11 +823,16 @@ a:hover{color:inherit}
 <!-- HERO: ZOOM-THROUGH INTRO, THEN POSTER -->
 <section id="top" class="zi" aria-label="Intro">
 <div class="zi-pin">
-<div class="zi-stage">
+<div class="zi-stage" onPointerMove="{{ ziMove }}" onPointerLeave="{{ ziLeave }}">
 <img class="zi-img" src="images/w10-heist-city-lg.webp" alt="Heist City map key art by RikoDZN: a masked character in a purple jacket sitting on a green car at sunset among palm trees" fetchpriority="high" decoding="async">
 <div class="zi-shade" aria-hidden="true"></div>
-<div class="zi-mask" aria-hidden="true"><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
+<div class="zi-mask" aria-hidden="true"><i class="zi-beam"></i><i class="zi-spot"></i><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span><span class="zi-rf">RIKODZN</span></p></div>
 <div class="zi-top" aria-hidden="true"><p class="kick mono"><i></i>Commissions open · Fortnite &amp; UEFN</p></div>
+<div class="zi-hud" aria-hidden="true"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+<p class="h tl mono"><b class="rec"></b>Rec · RikoDZN / Portfolio</p>
+<p class="h tr mono">18 pieces · 4 kinds of work</p>
+<p class="h bl mono">Key art · Thumbnails · 3D renders · Wallpapers</p>
+<p class="h br mono">Rendered in Blender · Finished in Photoshop</p></div>
 <p class="zi-cue mono" aria-hidden="true">Scroll to enter<i></i></p>
 <div class="zi-ui">
 <p class="kick mono"><i aria-hidden="true"></i>Commissions open · Fortnite &amp; UEFN</p>
@@ -1279,6 +1311,8 @@ class Component extends DCLogic {
     return {
       v2Cls: (s.mo ? 'mo' : '') + (s.zo ? ' zo' : '') + (af === 'Classic serif' ? ' af-classic' : (af === 'Brush script' ? ' af-brush' : '')),
       shards: this._zx.shards,
+      ziMove: (e) => this.ziMove(e),
+      ziLeave: () => this.ziLeave(),
       ch: this._zx.ch,
       wkHintT: s.wkPin ? 'Hold to zoom' : 'Swipe · Hold to zoom',
       wkSkip: (e) => this.wkSkip(e),
@@ -2685,6 +2719,19 @@ class Component extends DCLogic {
     this._zo = [word.offsetLeft + ii.offsetLeft + cx, word.offsetTop + ii.offsetTop + cy, mask.offsetWidth, mask.offsetHeight];
     mask.style.setProperty('--zox', this._zo[0].toFixed(1) + 'px');
     mask.style.setProperty('--zoy', this._zo[1].toFixed(1) + 'px');
+  }
+  ziMove(e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    const m = e.currentTarget.querySelector('.zi-mask');
+    if (!m) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    m.style.setProperty('--fx', Math.round(e.clientX - r.left) + 'px');
+    m.style.setProperty('--fy', Math.round(e.clientY - r.top) + 'px');
+    m.setAttribute('data-lit', '');
+  }
+  ziLeave() {
+    const m = document.querySelector('.zi-mask');
+    if (m) m.removeAttribute('data-lit');
   }
   ziScroll() {
     const doc = document;

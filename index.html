@@ -144,11 +144,8 @@ a:hover{color:inherit}
 
 /* ---------- intro screen: atmosphere ---------- */
 .v2.zo .zi-mask{background:#000}
-.zi-beam,.zi-spot{position:absolute;pointer-events:none}
-.zi-beam{top:-30%;bottom:-30%;left:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4) 50%,transparent);filter:blur(30px);transform:translateX(-140%) skewX(-18deg);animation:ziBeam 9s cubic-bezier(0.55,0,0.35,1) 1.2s infinite}
+.zi-beam,.zi-beam{top:-30%;bottom:-30%;left:0;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4) 50%,transparent);filter:blur(30px);transform:translateX(-140%) skewX(-18deg);animation:ziBeam 9s cubic-bezier(0.55,0,0.35,1) 1.2s infinite}
 @keyframes ziBeam{0%{transform:translateX(-140%) skewX(-18deg)}55%,100%{transform:translateX(420%) skewX(-18deg)}}
-.zi-spot{left:var(--fx,50%);top:var(--fy,50%);width:min(560px,42vw);aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,0.75),rgba(255,255,255,0.25) 45%,transparent);opacity:0;transition:opacity 0.5s}
-.zi-mask[data-lit] .zi-spot{opacity:1}
 
 .zi-hud{display:none}
 @media (max-height:100000px) and (prefers-reduced-motion: no-preference){
@@ -201,15 +198,17 @@ a:hover{color:inherit}
 /* ---------- shard strip ---------- */
 .shd{position:relative;z-index:2;padding:clamp(70px,9vw,130px) 0 clamp(30px,4vw,60px);overflow:hidden}
 .shd-row{display:flex;justify-content:center;align-items:center;width:max-content;margin:0 auto;padding:0 6vw;transform:translateX(var(--sx,0px))}
-.shd-s{position:relative;flex:none;width:clamp(110px,12.5vw,220px);height:clamp(300px,50vh,560px);margin:0 0 0 calc(clamp(110px,12.5vw,220px) * -0.2);padding:0;border:0;background:#15131C;cursor:zoom-in;clip-path:polygon(24% 0,100% 0,76% 100%,0 100%);translate:0 var(--oy,0);transition:width 0.6s var(--ease),filter 0.4s;filter:saturate(0.9) brightness(0.82)}
+.shd-s{position:relative;flex:none;width:clamp(110px,12.5vw,220px);height:clamp(300px,50vh,560px);margin:0 0 0 calc(clamp(110px,12.5vw,220px) * -0.2);padding:0;border:0;background:none;cursor:zoom-in;translate:0 var(--oy,0);transition:width 0.6s var(--ease),filter 0.4s;filter:saturate(0.92) brightness(0.86)}
 .shd-s:first-child{margin-left:0}
 .shd-s:nth-child(odd){--oy:-5%}
 .shd-s:nth-child(3n){--oy:6%}
 .shd-s img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;scale:1.12;transition:scale 0.8s var(--ease)}
-.shd-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--a) 40%,transparent));opacity:0;transition:opacity 0.4s}
+.shd-in,.shd-rf{position:absolute;left:0;right:0;height:100%;overflow:hidden;background:#15131C;clip-path:polygon(24% 0,100% 0,76% 100%,0 100%)}
+.shd-in{top:0}
+.shd-in::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--a) 40%,transparent));opacity:0;transition:opacity 0.4s}
 .shd-s:hover,.shd-s:focus-visible{width:clamp(200px,22vw,380px);filter:none;z-index:2}
 .shd-s:hover img{scale:1}
-.shd-s:hover::after{opacity:1}
+.shd-s:hover .shd-in::after{opacity:1}
 .shd-s:focus-visible{outline:none;filter:none}
 .shd-cue{display:flex;align-items:center;justify-content:center;gap:12px;margin:clamp(28px,3vw,44px) 0 0;color:var(--lab)}
 .shd-cue i{display:block;width:40px;height:1.5px;background:var(--sun)}
@@ -237,7 +236,7 @@ a:hover{color:inherit}
 .shd-cap b{font-family:Anybody,sans-serif;font-stretch:115%;font-weight:800;font-size:clamp(14px,1.2vw,18px);line-height:1.05;color:#FFFFFF;text-shadow:0 2px 14px rgba(0,0,0,0.8)}
 .shd-cap i{font-style:normal;font-size:9.5px;color:#F4F1EA;opacity:0.85}
 .shd-s:hover .shd-cap,.shd-s:focus-visible .shd-cap{opacity:1;transform:none;transition-delay:0.15s}
-.shd-s::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,236,214,0.45) 50%,transparent 65%);background-size:300% 100%;background-position:120% 0;mix-blend-mode:soft-light;animation:shdSweep 9s ease-in-out infinite;animation-delay:calc(var(--k,0) * 0.18s)}
+.shd-in::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,236,214,0.45) 50%,transparent 65%);background-size:300% 100%;background-position:120% 0;mix-blend-mode:soft-light;animation:shdSweep 9s ease-in-out infinite;animation-delay:calc(var(--k,0) * 0.18s)}
 @keyframes shdSweep{0%,62%{background-position:120% 0}88%,100%{background-position:-20% 0}}
 .shd-cue{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 26px;margin:clamp(30px,3.4vw,50px) 0 0}
 .shd-n{color:#F4F1EA}
@@ -251,6 +250,26 @@ a:hover{color:inherit}
 .shd-all:hover{border-color:var(--a);color:#FFFFFF}
 @media (max-width:760px){.shd-word{font-size:clamp(44px,15vw,80px)}.shd-cap{display:none}.shd-cue{gap:12px 18px}}
 @media (prefers-reduced-motion: reduce){.shd-word.a,.shd-word.b{transform:none}}
+
+
+/* shard strip: reflections + premium finish */
+.shd-row{margin-bottom:clamp(90px,16vh,190px)}
+.shd-rf{top:calc(100% + 8px);transform:scaleY(-1);opacity:0.42;filter:blur(1.5px) saturate(1.1);-webkit-mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.35) 22%,transparent 46%);mask-image:linear-gradient(0deg,#000 0%,rgba(0,0,0,0.35) 22%,transparent 46%);pointer-events:none;transition:opacity 0.4s}
+.shd-s:hover .shd-rf{opacity:0.6}
+.shd-in{box-shadow:none}
+.shd-in > img{z-index:0}
+.shd-in::after{background:linear-gradient(180deg,rgba(255,255,255,0.28) 0%,rgba(255,255,255,0.06) 9%,transparent 22%),linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--a) 40%,transparent));background-size:100% 100%,100% 100%}
+.shd-s:not(:hover) .shd-in::after{opacity:0.55}
+.shd-glass{display:none}
+.shd-in .edge{display:none}
+.shd-s{--edge:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.08) 60%,rgba(255,255,255,0.3))}
+.shd-in{outline:none}
+.shd-in::before{box-shadow:inset 1.5px 0 0 rgba(255,255,255,0.45)}
+.shd-s{filter:saturate(0.92) brightness(0.86) drop-shadow(0 26px 30px rgba(0,0,0,0.65))}
+.shd-row:hover .shd-s:not(:hover){filter:saturate(0.6) brightness(0.5) drop-shadow(0 26px 30px rgba(0,0,0,0.65))}
+.shd-s:hover,.shd-s:focus-visible{filter:drop-shadow(0 30px 40px rgba(0,0,0,0.7)) drop-shadow(0 0 30px color-mix(in srgb,var(--a) 35%,transparent))}
+.shd-floor{position:absolute;left:5%;right:5%;height:1px;top:var(--shf,62%);z-index:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.22) 30%,rgba(255,255,255,0.35) 50%,rgba(255,255,255,0.22) 70%,transparent);pointer-events:none}
+@media (max-width:760px){.shd-row{margin-bottom:clamp(70px,12vh,130px)}}
 
 /* ---------- full-screen chapters ---------- */
 .chs{position:relative;z-index:2}
@@ -853,10 +872,10 @@ a:hover{color:inherit}
 <!-- HERO: ZOOM-THROUGH INTRO, THEN POSTER -->
 <section id="top" class="zi" aria-label="Intro">
 <div class="zi-pin">
-<div class="zi-stage" onPointerMove="{{ ziMove }}" onPointerLeave="{{ ziLeave }}">
+<div class="zi-stage">
 <img class="zi-img" src="images/w13-sea-queen-lg.webp" alt="Sea Queen wallpaper by RikoDZN: a sea queen with glowing yellow eyes holding a trident, rising from the ocean under a full moon" fetchpriority="high" decoding="async">
 <div class="zi-shade" aria-hidden="true"></div>
-<div class="zi-mask" aria-hidden="true"><i class="zi-dust"></i><p class="zi-echo e1"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e2"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e3"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e4"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><i class="zi-beam"></i><i class="zi-spot"></i><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
+<div class="zi-mask" aria-hidden="true"><i class="zi-dust"></i><p class="zi-echo e1"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e2"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e3"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><p class="zi-echo e4"><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span><span>RIKODZN · RIKODZN · RIKODZN · RIKODZN · </span></p><i class="zi-beam"></i><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
 <i class="zi-floor" aria-hidden="true"></i>
 <i class="zi-flare" aria-hidden="true"></i>
 <p class="zi-rf2" aria-hidden="true"><span>R</span><span>I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p>
@@ -885,7 +904,7 @@ a:hover{color:inherit}
 <section class="shd" aria-label="Highlights">
 <div class="shd-bg" aria-hidden="true"><p class="shd-word a"><span>Key art · Thumbnails · 3D renders · Wallpapers · </span><span>Key art · Thumbnails · 3D renders · Wallpapers · </span></p><p class="shd-word b"><span>Win the click · Win the play · Win the follow · </span><span>Win the click · Win the play · Win the follow · </span></p></div>
 <div class="shd-glow" aria-hidden="true"></div>
-<div class="shd-row rv-g"><sc-for list="{{ shards }}" as="sh" hint-placeholder-count="11"><button type="button" class="shd-s" aria-label="Open {{ sh.name }}" onClick="{{ sh.open }}"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"><span class="shd-cap" aria-hidden="true"><b>{{ sh.name }}</b><i class="mono">{{ sh.cat }}</i></span></button></sc-for></div>
+<div class="shd-row rv-g"><sc-for list="{{ shards }}" as="sh" hint-placeholder-count="11"><button type="button" class="shd-s" aria-label="Open {{ sh.name }}" onClick="{{ sh.open }}"><span class="shd-in"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"></span><span class="shd-rf" aria-hidden="true"><img src="{{ sh.src }}" alt="" loading="lazy" decoding="async"></span><span class="shd-cap" aria-hidden="true"><b>{{ sh.name }}</b><i class="mono">{{ sh.cat }}</i></span></button></sc-for></div>
 <div class="shd-cue" aria-hidden="true"><span class="shd-n mono"><b>18</b> pieces</span><span class="shd-m mono">Scroll for more</span><span class="shd-ch"><i></i><i></i><i></i></span><a class="shd-all mono" href="#archive">See them all</a></div>
 </section>
 
@@ -1344,8 +1363,6 @@ class Component extends DCLogic {
     return {
       v2Cls: (s.mo ? 'mo' : '') + (s.zo ? ' zo' : '') + (af === 'Classic serif' ? ' af-classic' : (af === 'Brush script' ? ' af-brush' : '')),
       shards: this._zx.shards,
-      ziMove: (e) => this.ziMove(e),
-      ziLeave: () => this.ziLeave(),
       ch: this._zx.ch,
       wkHintT: s.wkPin ? 'Hold to zoom' : 'Swipe · Hold to zoom',
       wkSkip: (e) => this.wkSkip(e),
@@ -2754,19 +2771,7 @@ class Component extends DCLogic {
     mask.style.setProperty('--zox', this._zo[0].toFixed(1) + 'px');
     mask.style.setProperty('--zoy', this._zo[1].toFixed(1) + 'px');
   }
-  ziMove(e) {
-    if (e.pointerType && e.pointerType !== 'mouse') return;
-    const m = e.currentTarget.querySelector('.zi-mask');
-    if (!m) return;
-    const r = e.currentTarget.getBoundingClientRect();
-    m.style.setProperty('--fx', Math.round(e.clientX - r.left) + 'px');
-    m.style.setProperty('--fy', Math.round(e.clientY - r.top) + 'px');
-    m.setAttribute('data-lit', '');
-  }
-  ziLeave() {
-    const m = document.querySelector('.zi-mask');
-    if (m) m.removeAttribute('data-lit');
-  }
+
   ziMirror() {
     const stage = document.querySelector('.zi-stage');
     if (!stage || !(this.state && this.state.zo)) return;

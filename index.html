@@ -79,7 +79,7 @@ a:hover{color:inherit}
 /* ---------- zoom-through intro + poster ---------- */
 .zi{position:relative;z-index:1}
 .zi-stage{position:relative;height:min(100vh,1000px);min-height:640px;overflow:hidden;background:#07060A;-webkit-user-select:none;user-select:none}
-.zi-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--zi,1.04));transform-origin:50% 45%}
+.zi-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--zi,1.04));transform-origin:50% 45%;animation:camDrift 30s ease-in-out infinite alternate}
 .zi-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,6,10,0.7) 0%,rgba(7,6,10,0) 24%,rgba(7,6,10,0) 36%,rgba(30,10,38,0.72) 58%,rgba(7,6,10,0.97) 84%),radial-gradient(90% 60% at 50% 110%,color-mix(in srgb,var(--a) 34%,transparent),transparent 70%)}
 .zi-stage .emb{z-index:2}
 .zi-mask{display:none}
@@ -131,7 +131,7 @@ a:hover{color:inherit}
 .ch + .ch{margin-top:clamp(18px,2vw,30px)}
 .ch-stage{position:relative;height:min(100vh,900px);min-height:620px;overflow:hidden}
 .ch-frame{position:absolute;inset:0;overflow:hidden;clip-path:inset(calc((1 - var(--cp,1)) * 14%) calc((1 - var(--cp,1)) * 10%) round calc((1 - var(--cp,1)) * 44px + 0px));background:#0E0C14}
-.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(calc(1.22 - var(--cp,1) * 0.14 - var(--cq,0) * 0.06));transform-origin:60% 45%}
+.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:translate(calc(var(--cq,0) * -2.2%),calc(var(--cq,0) * -1.4%)) scale(calc(1.2 - var(--cp,1) * 0.12 + var(--cq,0) * 0.12));transform-origin:60% 45%;animation:camDrift 26s ease-in-out infinite alternate}
 .ch-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,6,10,0.9) 0%,rgba(7,6,10,0.55) 36%,rgba(7,6,10,0) 62%),linear-gradient(0deg,rgba(7,6,10,0.85) 0%,rgba(7,6,10,0) 40%),radial-gradient(70% 60% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}
 .ch-ui{position:absolute;left:0;bottom:0;z-index:2;width:min(900px,100%);padding:0 clamp(20px,4.5vw,72px) clamp(36px,7vh,80px);opacity:var(--cu,1);transform:translateY(calc((1 - var(--cu,1)) * 50px))}
 .ch-n{display:inline-flex;align-items:center;gap:12px;margin:0 0 14px;color:#F4F1EA}
@@ -168,6 +168,38 @@ a:hover{color:inherit}
 .bud-d{margin:14px 0 0;max-width:600px;color:#DAD6E2}
 .bud-act{position:relative;display:flex;flex-wrap:wrap;gap:12px}
 .ch-act .b-g{min-height:52px}
+
+
+/* ---------- cinematic layer ---------- */
+@keyframes camDrift{0%{translate:0 0;scale:1}100%{translate:-1.6% -1%;scale:1.05}}
+/* light rays + dust over chapter art */
+.ch-fx{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.ch-fx .ray{position:absolute;left:-25%;top:-40%;width:80%;height:180%;background:repeating-linear-gradient(100deg,transparent 0 7%,rgba(255,214,170,0.22) 9%,transparent 12%,transparent 17%,rgba(255,180,200,0.14) 19%,transparent 23%);filter:blur(14px);mix-blend-mode:screen;transform-origin:0 0;rotate:-14deg;animation:raySway 16s ease-in-out infinite alternate}
+.ch-fx .ray.r2{left:5%;width:60%;opacity:0.7;rotate:-22deg;animation-duration:21s;animation-delay:-7s}
+@keyframes raySway{0%{rotate:-18deg;opacity:0.55}50%{opacity:1}100%{rotate:-8deg;opacity:0.65}}
+.ch-fx .dust{position:absolute;inset:-30% -10%;background-image:radial-gradient(1.6px 1.6px at 23px 41px,rgba(255,236,214,0.95),transparent),radial-gradient(1.2px 1.2px at 151px 112px,rgba(255,220,235,0.85),transparent),radial-gradient(2px 2px at 92px 190px,rgba(255,240,220,0.7),transparent),radial-gradient(1px 1px at 201px 23px,rgba(255,255,255,0.9),transparent),radial-gradient(1.4px 1.4px at 61px 251px,rgba(255,225,200,0.8),transparent);background-size:240px 280px;mix-blend-mode:screen;opacity:0.55;animation:dustA 46s linear infinite,dustTw 5s ease-in-out infinite alternate}
+.ch-fx .dust.d2{background-size:380px 330px;opacity:0.35;filter:blur(0.6px);animation:dustB 70s linear infinite,dustTw 7s ease-in-out -2s infinite alternate}
+@keyframes dustA{to{transform:translate(-240px,-280px)}}
+@keyframes dustB{to{transform:translate(380px,-330px)}}
+@keyframes dustTw{from{opacity:0.25}to{opacity:0.6}}
+/* letterbox bars + black cut (only while chapters pin) */
+.ch-bar{position:absolute;left:0;right:0;z-index:4;height:calc(var(--lb,0) * 10vh);background:#000;pointer-events:none}
+.ch-bar.t{top:0}
+.ch-bar.b{bottom:0}
+.ch-cut{position:absolute;inset:0;z-index:5;background:#000;opacity:var(--blk,0);pointer-events:none}
+.ch-ui,.ch-side{z-index:3}
+@media (max-height:100000px) and (prefers-reduced-motion: no-preference){
+.v2.zo .ch-ui{padding-bottom:calc(clamp(36px,7vh,80px) + var(--lb,0) * 10vh)}
+.v2.zo .ch-side{bottom:calc(clamp(36px,7vh,80px) + var(--lb,0) * 10vh)}
+}
+/* archive tiles: tilt toward the cursor with a moving glare */
+.g-btn{transition:transform 0.6s var(--ease),box-shadow 0.4s}
+.g-btn::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,0.34),rgba(255,214,190,0.1) 28%,transparent 58%);mix-blend-mode:soft-light;opacity:0;transition:opacity 0.35s}
+@media (hover:hover) and (pointer:fine){
+.g-btn[data-tilt]{z-index:3;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.025);transition:transform 0.14s linear,box-shadow 0.3s;box-shadow:0 0 0 1px rgba(255,255,255,0.2),0 30px 60px -24px rgba(0,0,0,0.9),0 18px 60px -30px var(--a)}
+.g-btn[data-tilt]::before{opacity:1}
+.g.big .g-btn[data-tilt]{transform:perspective(1400px) rotateX(calc(var(--rx,0deg) * 0.6)) rotateY(calc(var(--ry,0deg) * 0.6)) scale(1.012)}
+}
 
 /* ---------- motion system: scroll reveals (the page script sets data-in) ---------- */
 .w{display:inline-block;clip-path:inset(-0.12em -0.4em -0.26em -0.4em)}
@@ -687,7 +719,6 @@ a:hover{color:inherit}
 <div class="zi-stage">
 <img class="zi-img" src="images/w10-heist-city-lg.webp" alt="Heist City map key art by RikoDZN: a masked character in a purple jacket sitting on a green car at sunset among palm trees" fetchpriority="high" decoding="async">
 <div class="zi-shade" aria-hidden="true"></div>
-<div class="emb" aria-hidden="true"><i style="--x: 6%; --s: 4px; --t: 13s; --dl: -2s; --dx: 26px"></i><i style="--x: 14%; --s: 3px; --t: 17s; --dl: -9s; --dx: -18px; --o: 0.55"></i><i style="--x: 23%; --s: 5px; --t: 15s; --dl: -5s; --dx: 20px"></i><i style="--x: 31%; --s: 3px; --t: 19s; --dl: -13s; --dx: -24px; --o: 0.5"></i><i style="--x: 42%; --s: 4px; --t: 14s; --dl: -7s; --dx: 16px"></i><i style="--x: 55%; --s: 3px; --t: 18s; --dl: -1s; --dx: -20px; --o: 0.6"></i><i style="--x: 63%; --s: 5px; --t: 16s; --dl: -11s; --dx: 22px"></i><i style="--x: 72%; --s: 3px; --t: 20s; --dl: -4s; --dx: -16px; --o: 0.5"></i><i style="--x: 81%; --s: 4px; --t: 15s; --dl: -8s; --dx: 18px"></i><i style="--x: 90%; --s: 3px; --t: 17s; --dl: -14s; --dx: -22px; --o: 0.55"></i><i style="--x: 96%; --s: 4px; --t: 13s; --dl: -6s; --dx: -14px"></i></div>
 <div class="zi-mask" aria-hidden="true"><p class="zi-word"><span>R</span><span class="zi-i">I</span><span>K</span><span>O</span><span>D</span><span>Z</span><span>N</span></p></div>
 <div class="zi-top" aria-hidden="true"><p class="kick mono"><i></i>Commissions open · Fortnite &amp; UEFN</p></div>
 <p class="zi-cue mono" aria-hidden="true">Scroll to enter<i></i></p>
@@ -714,7 +745,7 @@ a:hover{color:inherit}
 <!-- 01 STATEMENT -->
 <section class="sec stmt" aria-label="What I do">
 <div class="wrap">
-<p class="lab mono rv-t"><b>(01)</b> The work</p>
+<p class="lab mono rv-t scr"><b>(01)</b> The work</p>
 <div class="stmt-w rv"><p class="stmt-t">I pose, light and render Fortnite and UEFN characters into <em>key art</em> that gets the click, for creators, map makers and studios.</p></div>
 <div class="stats rv-g">
 <div class="stat"><span class="stat-v"><span class="cnt" style="--to: 40" data-pre="$" aria-hidden="true"></span><span class="sr">$40</span></span><span class="stat-l mono rv-t">Thumbnails from</span></div>
@@ -729,9 +760,9 @@ a:hover{color:inherit}
 <section id="make" class="chs" aria-label="What I make">
 <article class="ch" aria-labelledby="ch-a">
 <div class="ch-stage">
-<div class="ch-frame"><img class="ch-img" src="images/w18-entity-hunters-lg.webp" alt="Entity Hunters map key art by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Map key art example full size" onClick="{{ ch.a.open }}"></button></div>
+<div class="ch-frame"><img class="ch-img" src="images/w18-entity-hunters-lg.webp" alt="Entity Hunters map key art by RikoDZN" loading="lazy" decoding="async"><div class="ch-fx" aria-hidden="true"><i class="ray"></i><i class="ray r2"></i><i class="dust"></i><i class="dust d2"></i></div><button type="button" class="ch-big" aria-label="View Map key art example full size" onClick="{{ ch.a.open }}"></button></div>
 <div class="ch-ui">
-<p class="ch-n mono">Chapter <b>01</b></p>
+<p class="ch-n mono scr">Chapter <b>01</b></p>
 <h2 class="ch-t" id="ch-a">Map<span>key art</span></h2>
 <p class="ch-d">The image players see first in Discover. Landscape and portrait key art, lobby backgrounds and update art for your island.</p>
 <div class="ch-row">
@@ -740,13 +771,14 @@ a:hover{color:inherit}
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.a.s0 }}" aria-label="Open Heist City"><img src="images/w10-heist-city-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Heist City</span></button><button type="button" class="ch-th" onClick="{{ ch.a.s1 }}" aria-label="Open TQ4 Party Royale"><img src="images/w09-party-royale-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">TQ4 Party Royale</span></button></div>
+<div class="ch-bar t" aria-hidden="true"></div><div class="ch-bar b" aria-hidden="true"></div><div class="ch-cut" aria-hidden="true"></div>
 </div>
 </article>
 <article class="ch" aria-labelledby="ch-b">
 <div class="ch-stage">
-<div class="ch-frame"><img class="ch-img" src="images/w05-loadouts-lg.webp" alt="Loadouts thumbnail by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View YouTube thumbnails example full size" onClick="{{ ch.b.open }}"></button></div>
+<div class="ch-frame"><img class="ch-img" src="images/w05-loadouts-lg.webp" alt="Loadouts thumbnail by RikoDZN" loading="lazy" decoding="async"><div class="ch-fx" aria-hidden="true"><i class="ray"></i><i class="ray r2"></i><i class="dust"></i><i class="dust d2"></i></div><button type="button" class="ch-big" aria-label="View YouTube thumbnails example full size" onClick="{{ ch.b.open }}"></button></div>
 <div class="ch-ui">
-<p class="ch-n mono">Chapter <b>02</b></p>
+<p class="ch-n mono scr">Chapter <b>02</b></p>
 <h2 class="ch-t" id="ch-b">YouTube<span>thumbnails</span></h2>
 <p class="ch-d">Thumbnails built to win the click, with A/B versions so you can test which one does.</p>
 <div class="ch-row">
@@ -755,13 +787,14 @@ a:hover{color:inherit}
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.b.s0 }}" aria-label="Open Clutch IQ"><img src="images/w16-clutch-iq-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Clutch IQ</span></button><button type="button" class="ch-th" onClick="{{ ch.b.s1 }}" aria-label="Open Hide &amp; Seek"><img src="images/w08-hide-seek-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Hide &amp; Seek</span></button></div>
+<div class="ch-bar t" aria-hidden="true"></div><div class="ch-bar b" aria-hidden="true"></div><div class="ch-cut" aria-hidden="true"></div>
 </div>
 </article>
 <article class="ch" aria-labelledby="ch-c">
 <div class="ch-stage">
-<div class="ch-frame"><img class="ch-img" src="images/w13-sea-queen-lg.webp" alt="Sea Queen wallpaper by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Wallpapers &amp; renders example full size" onClick="{{ ch.c.open }}"></button></div>
+<div class="ch-frame"><img class="ch-img" src="images/w13-sea-queen-lg.webp" alt="Sea Queen wallpaper by RikoDZN" loading="lazy" decoding="async"><div class="ch-fx" aria-hidden="true"><i class="ray"></i><i class="ray r2"></i><i class="dust"></i><i class="dust d2"></i></div><button type="button" class="ch-big" aria-label="View Wallpapers &amp; renders example full size" onClick="{{ ch.c.open }}"></button></div>
 <div class="ch-ui">
-<p class="ch-n mono">Chapter <b>03</b></p>
+<p class="ch-n mono scr">Chapter <b>03</b></p>
 <h2 class="ch-t" id="ch-c">Wallpapers<span>&amp; renders</span></h2>
 <p class="ch-d">High-res wallpapers and 3D renders, starring your own skin or character, for desktop and phone.</p>
 <div class="ch-row">
@@ -770,13 +803,14 @@ a:hover{color:inherit}
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.c.s0 }}" aria-label="Open Eclipse"><img src="images/w14-eclipse-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Eclipse</span></button><button type="button" class="ch-th" onClick="{{ ch.c.s1 }}" aria-label="Open Crowd Render"><img src="images/w03-crowd-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Crowd Render</span></button></div>
+<div class="ch-bar t" aria-hidden="true"></div><div class="ch-bar b" aria-hidden="true"></div><div class="ch-cut" aria-hidden="true"></div>
 </div>
 </article>
 <article class="ch" aria-labelledby="ch-d">
 <div class="ch-stage">
-<div class="ch-frame"><img class="ch-img" src="images/w09-party-royale-lg.webp" alt="TQ4 Party Royale key art by RikoDZN" loading="lazy" decoding="async"><button type="button" class="ch-big" aria-label="View Launch kits example full size" onClick="{{ ch.d.open }}"></button></div>
+<div class="ch-frame"><img class="ch-img" src="images/w09-party-royale-lg.webp" alt="TQ4 Party Royale key art by RikoDZN" loading="lazy" decoding="async"><div class="ch-fx" aria-hidden="true"><i class="ray"></i><i class="ray r2"></i><i class="dust"></i><i class="dust d2"></i></div><button type="button" class="ch-big" aria-label="View Launch kits example full size" onClick="{{ ch.d.open }}"></button></div>
 <div class="ch-ui">
-<p class="ch-n mono">Chapter <b>04</b></p>
+<p class="ch-n mono scr">Chapter <b>04</b></p>
 <h2 class="ch-t" id="ch-d">Launch<span>kits</span></h2>
 <p class="ch-d">Matching key art, lobby, portrait and update art in one order, for a launch or a whole season.</p>
 <div class="ch-row">
@@ -785,6 +819,7 @@ a:hover{color:inherit}
 </div>
 </div>
 <div class="ch-side"><button type="button" class="ch-th" onClick="{{ ch.d.s0 }}" aria-label="Open Winter Zipline"><img src="images/w11-winter-zipline-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Winter Zipline</span></button><button type="button" class="ch-th" onClick="{{ ch.d.s1 }}" aria-label="Open Duck Squad"><img src="images/w07-duck-sm.webp" alt="" loading="lazy" decoding="async"><span class="mono">Duck Squad</span></button></div>
+<div class="ch-bar t" aria-hidden="true"></div><div class="ch-bar b" aria-hidden="true"></div><div class="ch-cut" aria-hidden="true"></div>
 </div>
 </article>
 </section>
@@ -799,7 +834,7 @@ a:hover{color:inherit}
 <section id="work" class="sec wk {{ wkCls }}" aria-label="Selected work">
 <div class="wrap head">
 <div>
-<p class="lab mono rv-t"><b>(02)</b> Now showing</p>
+<p class="lab mono rv-t scr"><b>(02)</b> Now showing</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">Selected</span></span> <span class="w"><em class="wi" style="--wi: 1">work</em></span></h2>
 </div>
 <p class="note rv">Browse the key art, hold anywhere on a piece to zoom into the detail, or click to see it full size.</p>
@@ -839,12 +874,12 @@ a:hover{color:inherit}
 <div class="wrap">
 <div class="head">
 <div>
-<p class="lab mono rv-t"><b>(03)</b> Archive</p>
+<p class="lab mono rv-t scr"><b>(03)</b> Archive</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">Every</span></span> <span class="w"><em class="wi" style="--wi: 1">piece</em></span></h2>
 </div>
 <div class="filt rv-g"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><button type="button" class="fp {{ f.cls }}" aria-pressed="{{ f.pressed }}" onClick="{{ f.pick }}">{{ f.label }}<span class="mono">{{ f.n }}</span></button></sc-for></div>
 </div>
-<div class="grid-w" onMouseMove="{{ spot }}">
+<div class="grid-w" onMouseMove="{{ spot }}" onMouseLeave="{{ unspot }}">
 <div class="grid" data-f="{{ filt }}">
 <sc-for list="{{ archive }}" as="x" hint-placeholder-count="18"><figure class="g rv-i {{ x.size }}" data-c="{{ x.c }}"><button type="button" class="g-btn" onClick="{{ x.open }}" aria-label="{{ x.label }}"><img src="{{ x.src }}" alt="{{ x.alt }}" loading="lazy" decoding="async"><span class="g-cap"><span class="g-id mono">{{ x.id }}</span><span class="g-name">{{ x.name }}</span><span class="g-cat mono">{{ x.cat }}</span></span></button></figure></sc-for>
 </div>
@@ -858,7 +893,7 @@ a:hover{color:inherit}
 <div class="wrap">
 <div class="head">
 <div>
-<p class="lab mono rv-t"><b>(04)</b> Services</p>
+<p class="lab mono rv-t scr"><b>(04)</b> Services</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">The</span></span> <span class="w"><em class="wi" style="--wi: 1">menu</em></span></h2>
 </div>
 <p class="note rv">Prices start here, but they aren't fixed. Order in a few clicks on my Sky shop, or tell me your budget and we'll work something out.</p>
@@ -869,7 +904,7 @@ a:hover{color:inherit}
 </div>
 <div class="xtra">
 <div class="xbox rv">
-<p class="lab mono rv-t">Add-ons &amp; rush</p>
+<p class="lab mono rv-t scr">Add-ons &amp; rush</p>
 <ul class="xl rv-g">
 <li><span class="xl-n">A/B thumbnail</span><span class="xl-d">A second, different thumbnail design to test which gets more clicks.</span><span class="xl-p">+$25</span></li>
 <li><span class="xl-n">A/B key art</span><span class="xl-d">A second, different key art design to test.</span><span class="xl-p">+$60</span></li>
@@ -880,7 +915,7 @@ a:hover{color:inherit}
 </ul>
 </div>
 <div class="xbox rv" style="--d: 120ms">
-<p class="lab mono rv-t" style="--d: 120ms">Deals</p>
+<p class="lab mono rv-t scr" style="--d: 120ms">Deals</p>
 <ul class="xl rv-g">
 <li><span class="xl-n">First thumbnail</span><span class="xl-d">A free A/B version on your first thumbnail order.</span><span class="xl-p">Free</span></li>
 <li><span class="xl-n">First map order</span><span class="xl-d">A free alternate version on your first key art.</span><span class="xl-p">Free</span></li>
@@ -893,7 +928,7 @@ a:hover{color:inherit}
 </div>
 <aside class="bud rv" aria-label="Working with your budget">
 <div class="bud-t">
-<p class="lab mono rv-t">Tight budget?</p>
+<p class="lab mono rv-t scr">Tight budget?</p>
 <h3 class="bud-h">Tell me your budget. <em>Let&#39;s talk.</em></h3>
 <p class="bud-d">Every price on this page is a starting point, not a wall. Tell me what you need and what you can spend, and we&#39;ll negotiate something that works for both of us.</p>
 </div>
@@ -913,7 +948,7 @@ a:hover{color:inherit}
 <section id="process" class="sec proc" aria-label="Process">
 <div class="wrap head">
 <div>
-<p class="lab mono rv-t"><b>(05)</b> Process</p>
+<p class="lab mono rv-t scr"><b>(05)</b> Process</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">Built</span></span> <span class="w"><span class="wi" style="--wi: 1">in</span></span> <span class="w"><em class="wi" style="--wi: 2">passes</em></span></h2>
 </div>
 <p class="note rv">Every piece goes through the same four passes, from the first pose to the last glow.</p>
@@ -947,7 +982,7 @@ a:hover{color:inherit}
 <div class="wrap ab">
 <figure class="ab-art rv-i"><img src="images/w13-sea-queen-lg.webp" alt="Wallpaper: a sea queen with glowing yellow eyes holding a trident, rising from the ocean under a full moon" loading="lazy" decoding="async"><figcaption class="mono">Sea Queen · wallpaper</figcaption></figure>
 <div class="ab-copy">
-<p class="lab mono rv-t"><b>(06)</b> About</p>
+<p class="lab mono rv-t scr"><b>(06)</b> About</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">Hi,</span></span> <span class="w"><span class="wi" style="--wi: 1">I'm</span></span> <span class="w"><em class="wi" style="--wi: 2">Riko.</em></span></h2>
 <p class="ab-lead rv" style="--d: 200ms">I'm a freelance key art artist. I make thumbnails, UEFN key art, lobby backgrounds and 3D renders built to win the click, the play and the follow.</p>
 <p class="ab-p rv" style="--d: 300ms">Scenes are built in Blender: rigging, posing, lighting and the final render in EEVEE. Text, glow and colour are finished in Photoshop. I also build my own tools: Crowd Scatter fills a scene with crowds that wrap around the hero, and Skin Fusion merges parts of different characters into one rigged, poseable custom character.</p>
@@ -967,7 +1002,7 @@ a:hover{color:inherit}
 <section id="faq" class="sec faq" aria-label="Questions">
 <div class="wrap fq">
 <div class="fq-head">
-<p class="lab mono rv-t"><b>(07)</b> FAQ</p>
+<p class="lab mono rv-t scr"><b>(07)</b> FAQ</p>
 <h2 class="h2 rv-h"><span class="w"><span class="wi">Before</span></span> <span class="w"><span class="wi" style="--wi: 1">you</span></span> <span class="w"><em class="wi" style="--wi: 2">order</em></span></h2>
 <p class="note rv">Quick answers to what clients ask most. Anything else, just <a class="tl" href="mailto:dznriko061@gmail.com">email me</a>.</p>
 </div>
@@ -987,15 +1022,15 @@ a:hover{color:inherit}
 <section id="contact" class="sec cta" aria-label="Order">
 <div class="emb" aria-hidden="true"><i style="--x: 4%; --s: 4px; --t: 14s; --dl: -3s; --dx: 22px"></i><i style="--x: 11%; --s: 3px; --t: 18s; --dl: -10s; --dx: -18px; --o: 0.5"></i><i style="--x: 19%; --s: 5px; --t: 16s; --dl: -6s; --dx: 18px"></i><i style="--x: 28%; --s: 3px; --t: 20s; --dl: -15s; --dx: -22px; --o: 0.5"></i><i style="--x: 37%; --s: 4px; --t: 15s; --dl: -1s; --dx: 14px; --o: 0.6"></i><i style="--x: 48%; --s: 3px; --t: 19s; --dl: -8s; --dx: -16px; --o: 0.5"></i><i style="--x: 58%; --s: 5px; --t: 17s; --dl: -12s; --dx: 20px"></i><i style="--x: 67%; --s: 3px; --t: 21s; --dl: -5s; --dx: -20px; --o: 0.55"></i><i style="--x: 76%; --s: 4px; --t: 14s; --dl: -9s; --dx: 16px"></i><i style="--x: 85%; --s: 3px; --t: 18s; --dl: -2s; --dx: -18px; --o: 0.5"></i><i style="--x: 93%; --s: 5px; --t: 16s; --dl: -13s; --dx: -12px"></i></div>
 <div class="wrap">
-<p class="lab mono rv-t"><b>(08)</b> Ready when you are</p>
+<p class="lab mono rv-t scr"><b>(08)</b> Ready when you are</p>
 <h2 class="cta-h rv-h"><span class="w"><span class="wi">Give</span></span> <span class="w"><span class="wi" style="--wi: 1">your</span></span> <span class="w"><span class="wi" style="--wi: 2">map</span></span> <span class="w"><span class="wi" style="--wi: 3">the</span></span> <span class="w"><span class="wi" style="--wi: 4">art</span></span> <span class="w"><span class="wi" style="--wi: 5">it</span></span> <span class="w"><em class="wi" style="--wi: 6">deserves.</em></span></h2>
 <div class="cta-row rv-g">
 <a class="b b-a b-xl mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Order on Sky <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
 <a class="b b-g b-xl mag" href="#services" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">See prices</a>
 </div>
 <div class="q2">
-<article class="qc rv"><p class="lab mono rv-t">Creators</p><h3>Solo queue</h3><p class="qc-d">Thumbnails from $40, map key art from $125. Pick an item or a plan in my Sky shop and order in a few clicks. On a budget? Tell me and we&#39;ll work it out.</p><a class="b b-g mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Open the shop</a></article>
-<article class="qc rv" style="--d: 120ms"><p class="lab mono rv-t">Studios &amp; map teams</p><h3>Squad queue</h3><p class="qc-d">Island kits from $239, the Season Pack and the monthly plan. Bigger projects are quoted in chat before I start.</p><a class="b b-g mag" href="mailto:dznriko061@gmail.com" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>dznriko061@gmail.com</a></article>
+<article class="qc rv"><p class="lab mono rv-t scr">Creators</p><h3>Solo queue</h3><p class="qc-d">Thumbnails from $40, map key art from $125. Pick an item or a plan in my Sky shop and order in a few clicks. On a budget? Tell me and we&#39;ll work it out.</p><a class="b b-g mag" href="https://getskystudio.com/shop/riko" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}">Open the shop</a></article>
+<article class="qc rv" style="--d: 120ms"><p class="lab mono rv-t scr">Studios &amp; map teams</p><h3>Squad queue</h3><p class="qc-d">Island kits from $239, the Season Pack and the monthly plan. Bigger projects are quoted in chat before I start.</p><a class="b b-g mag" href="mailto:dznriko061@gmail.com" onMouseMove="{{ mag }}" onMouseLeave="{{ unmag }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg>dznriko061@gmail.com</a></article>
 </div>
 </div>
 </section>
@@ -1189,6 +1224,7 @@ class Component extends DCLogic {
       lbSwUp: (e) => this.lbSwUp(e),
       accent: accent,
       spot: (e) => this.spot(e),
+      unspot: () => this.tiltOff(),
       mag: (e) => this.mag(e),
       unmag: (e) => this.unmag(e),
       cvItems: F.cv,
@@ -2242,6 +2278,53 @@ class Component extends DCLogic {
     const r = el.getBoundingClientRect();
     el.style.setProperty('--sx', Math.round(e.clientX - r.left) + 'px');
     el.style.setProperty('--sy', Math.round(e.clientY - r.top) + 'px');
+    const b = e.target && e.target.closest ? e.target.closest('.g-btn') : null;
+    if (b !== this._tiltEl) this.tiltOff();
+    if (!b || (this.state && this.state.mo !== true)) return;
+    this._tiltEl = b;
+    const br = b.getBoundingClientRect();
+    const x = (e.clientX - br.left) / br.width, y = (e.clientY - br.top) / br.height;
+    b.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
+    b.style.setProperty('--rx', ((0.5 - y) * 11).toFixed(2) + 'deg');
+    b.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
+    b.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+    if (!b.hasAttribute('data-tilt')) b.setAttribute('data-tilt', '');
+  }
+  tiltOff() {
+    const b = this._tiltEl;
+    this._tiltEl = null;
+    if (b) b.removeAttribute('data-tilt');
+  }
+  scramble(el) {
+    if (el.__scr) return;
+    el.__scr = true;
+    const nodes = [];
+    const tw = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = tw.nextNode())) if (n.data.trim()) nodes.push([n, n.data]);
+    if (!nodes.length) return;
+    const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*/+';
+    const total = nodes.reduce((t, x) => t + x[1].length, 0);
+    const dur = Math.min(1100, 420 + total * 22);
+    const t0 = performance.now();
+    const tick = (now) => {
+      if (this._dead) return;
+      const p = Math.min(1, (now - t0) / dur);
+      let k = 0;
+      for (let i = 0; i < nodes.length; i++) {
+        const orig = nodes[i][1];
+        let out = '';
+        for (let j = 0; j < orig.length; j++, k++) {
+          const ch = orig[j];
+          const at = (k / total) * 0.75;
+          out += (ch === ' ' || p >= at + 0.25) ? ch : (p < at ? (Math.random() < 0.5 ? ' ' : glyphs[(Math.random() * glyphs.length) | 0]) : glyphs[(Math.random() * glyphs.length) | 0]);
+        }
+        if (nodes[i][0].data !== out) nodes[i][0].data = out;
+      }
+      if (p < 1) requestAnimationFrame(tick);
+      else nodes.forEach((x) => { if (x[0].data !== x[1]) x[0].data = x[1]; });
+    };
+    requestAnimationFrame(tick);
   }
   mag(e) {
     const el = e.currentTarget;
@@ -2397,6 +2480,7 @@ class Component extends DCLogic {
       ents.forEach((en) => {
         if (!en.isIntersecting) return;
         en.target.setAttribute('data-in', '');
+        if (en.target.classList.contains('scr')) { try { this.scramble(en.target); } catch (err) {} }
         if (this._moIO) this._moIO.unobserve(en.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
@@ -2406,7 +2490,7 @@ class Component extends DCLogic {
   motionScan() {
     const io = this._moIO;
     if (!io) return;
-    const els = document.querySelectorAll('.v2 .rv:not([data-in]), .v2 .rv-h:not([data-in]), .v2 .rv-t:not([data-in]), .v2 .rv-i:not([data-in]), .v2 .rv-s:not([data-in]), .v2 .rv-g:not([data-in]), .v2 .fw:not([data-in])');
+    const els = document.querySelectorAll('.v2 .rv:not([data-in]), .v2 .rv-h:not([data-in]), .v2 .rv-t:not([data-in]), .v2 .rv-i:not([data-in]), .v2 .rv-s:not([data-in]), .v2 .rv-g:not([data-in]), .v2 .fw:not([data-in]), .v2 .scr:not([data-in])');
     for (let i = 0; i < els.length; i++) {
       const el = els[i];
       if (el.__mo) continue;
@@ -2536,6 +2620,11 @@ class Component extends DCLogic {
       el.style.setProperty('--cp', cpe.toFixed(4));
       el.style.setProperty('--cq', cq.toFixed(4));
       el.style.setProperty('--cu', (cu * cu * (3 - 2 * cu)).toFixed(3));
+      const lbIn = Math.min(1, Math.max(0, (cp - 0.92) / 0.08));
+      const lb = zo ? lbIn : 0;
+      el.style.setProperty('--lb', (lb * lb * (3 - 2 * lb)).toFixed(3));
+      const bk = zo && i < chs.length - 1 ? Math.min(1, Math.max(0, (cq - 0.8) / 0.2)) : 0;
+      el.style.setProperty('--blk', bk.toFixed(3));
     }
   }
   navScroll() {

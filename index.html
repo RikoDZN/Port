@@ -2208,21 +2208,23 @@ class Component extends DCLogic {
       const prog = Math.min(1, Math.max(0, (c.st - r.top) / total));
       const goal = Math.min(N - 1, Math.max(0, Math.round(prog * (N - 1))));
       if (goal !== c.goal) {
-        const steps = Math.abs(goal - c.pos);
+        let from = Math.round(c.pos);
+        if (c.tw) from = c.twq < 0.5 ? c.tw.from : c.tw.to;
         c.goal = goal;
-        c.tw = { from: c.pos, to: goal, t0: t, dur: c.rm ? 1 : Math.min(1100, 720 + 120 * Math.max(0, steps - 1)) };
+        c.tw = from === goal ? null : { from: from, to: goal, t0: t, dur: c.rm ? 1 : 900 };
+        c.twq = 0;
+        if (!c.tw) c.pos = goal;
       }
       const prevPos = c.pos;
       if (c.tw) {
         const q = Math.min(1, Math.max(0, (t - c.tw.t0) / c.tw.dur));
-        c.pos = c.tw.from + (c.tw.to - c.tw.from) * this.wkEase(q);
-        if (q >= 1) { c.pos = c.tw.to; c.tw = null; }
+        c.twq = this.wkEase(q);
+        c.pos = c.tw.from + (c.tw.to - c.tw.from) * c.twq;
         busy = true;
       }
-      c.vel = (c.pos - prevPos) / Math.max(dt, 0.001);
-      a = Math.min(N - 1, Math.floor(c.pos + 1e-6));
-      b = Math.min(N - 1, a + 1);
-      p = b === a ? 0 : Math.min(1, Math.max(0, c.pos - a));
+      c.vel = c.tw ? (c.twq < 1 ? 1.2 * Math.sign(c.tw.to - c.tw.from) : 0) : 0;
+      if (c.tw) { a = c.tw.from; b = c.tw.to; p = c.twq; if (c.twq >= 1) { c.pos = c.tw.to; c.tw = null; } }
+      else { a = b = Math.min(N - 1, Math.max(0, Math.round(c.pos))); p = 0; }
       idx = c.goal;
       bar = prog;
       c.cur = Math.min(N - 1, Math.round(c.pos));
@@ -2341,6 +2343,59 @@ class Component extends DCLogic {
   wkRestSoon() {
     if (this._wkRestT) clearTimeout(this._wkRestT);
     this._wkRestT = setTimeout(() => { this._wkRestT = 0; this.wkRest(); }, 170);
+  }
+  wkWheel(e) {
+    const c = this._wk;
+    if (!c || !c.pinned || e.ctrlKey || Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+    const g = this.wkGeom();
+    if (!g || !g.pinned) return;
+    const dir = e.deltaY > 0 ? 1 : e.deltaY < 0 ? -1 : 0;
+    if (!dir) return;
+    const vh = window.innerHeight || 800;
+    const per = g.per, o = g.o, total = g.total;
+    const now = e.timeStamp || performance.now();
+    const lk = this._wl || (this._wl = { until: 0, start: 0, last: 0 });
+    const gap = now - lk.last;
+    lk.last = now;
+    if (lk.start && now - lk.start < 800) lk.until = Math.max(lk.until, lk.start + 800);
+    if (gap < 420) lk.until = Math.max(lk.until, now + 420);
+    let target = null;
+    if (o > -2 && o < total + 2) {
+      const cur = Math.max(0, Math.min(7, Math.round(o / per)));
+      if ((dir > 0 && cur < 7) || (dir < 0 && cur > 0)) target = cur + dir;
+      else if (Math.abs(o - cur * per) > 2) target = cur;
+    } else if (dir > 0 && o < 0 && o > -vh * 0.55) target = 0;
+    else if (dir < 0 && o > total && o < total + vh * 0.55) target = 7;
+    if (now < lk.until && o > -vh * 0.55 && o < total + vh * 0.55) { e.preventDefault(); return; }
+    if (target === null) return;
+    e.preventDefault();
+    lk.start = now;
+    lk.until = now + 800;
+    this.wkStop(target, false);
+  }
+  wkTouchStep(e) {
+    const c = this._wk;
+    if (!c || !c.pinned) return;
+    const g = this.wkGeom();
+    if (!g || !g.pinned) return;
+    if (e.type === 'touchstart') { const t0 = e.touches[0]; this._wt0 = t0 ? { y: t0.clientY, o: g.o, in: g.o > -2 && g.o < g.total + 2 } : null; return; }
+    const st = this._wt0;
+    if (!st || !st.in) return;
+    if (e.type === 'touchmove') {
+      const t1 = e.touches[0];
+      if (!t1) return;
+      const dy = st.y - t1.clientY, dir = dy > 0 ? 1 : -1;
+      const cur = Math.max(0, Math.min(7, Math.round(st.o / g.per)));
+      if ((dir > 0 && cur < 7) || (dir < 0 && cur > 0)) { e.preventDefault(); st.lock = true; }
+      return;
+    }
+    if (e.type === 'touchend' && st.lock) {
+      const t2 = e.changedTouches[0];
+      const dy = t2 ? st.y - t2.clientY : 0;
+      const cur = Math.max(0, Math.min(7, Math.round(st.o / g.per)));
+      if (Math.abs(dy) > 30) this.wkStop(cur + (dy > 0 ? 1 : -1), false);
+      this._wt0 = null;
+    }
   }
   wkSkip(e) {
     const el = document.getElementById('archive');
@@ -2685,6 +2740,12 @@ class Component extends DCLogic {
     } catch (err) {}
     try { this.motionInit(); } catch (err) {}
     try { this.ldInit(); } catch (err) {}
+    this._onWheel = (e) => this.wkWheel(e);
+    this._onTStep = (e) => this.wkTouchStep(e);
+    try {
+      window.addEventListener('wheel', this._onWheel, { passive: false });
+      ['touchstart', 'touchmove', 'touchend'].forEach((n) => window.addEventListener(n, this._onTStep, { passive: false }));
+    } catch (err) {}
   }
   ldInit() {
     const el = document.querySelector('.ld');
@@ -2966,6 +3027,10 @@ class Component extends DCLogic {
     if (this._svcIO) { this._svcIO.disconnect(); this._svcIO = null; }
     if (this._moIO) { this._moIO.disconnect(); this._moIO = null; }
     if (this._ziT) clearTimeout(this._ziT);
+    try {
+      if (this._onWheel) window.removeEventListener('wheel', this._onWheel);
+      if (this._onTStep) ['touchstart', 'touchmove', 'touchend'].forEach((n) => window.removeEventListener(n, this._onTStep));
+    } catch (err) {}
     if (this._rfRaf) cancelAnimationFrame(this._rfRaf);
     if (this._ldOut) clearTimeout(this._ldOut);
     if (this._ldDone) clearTimeout(this._ldDone);

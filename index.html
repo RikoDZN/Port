@@ -98,7 +98,7 @@ a:hover{color:inherit}
 @keyframes ldBob{to{translate:0 -14px}}
 .ld[data-ld="out"] .ld-l,.ld[data-ld="out"] .ld-main{filter:blur(6px);opacity:0;transition:filter 0.9s ease 0.2s,opacity 0.5s ease 0.75s}
 .ld-word{margin:0;font-family:Anybody,sans-serif;font-weight:900;font-stretch:150%;font-size:min(13vw,22vh);line-height:0.9;letter-spacing:-0.04em;white-space:nowrap}
-.ld-word.o{color:transparent;-webkit-text-stroke:1.5px rgba(244,241,234,0.4)}
+.ld-word.o{color:#000;-webkit-text-stroke:1.5px rgba(244,241,234,0.4);paint-order:stroke fill}
 .ld-word.f{position:absolute;inset:0;background:var(--sun-t);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;clip-path:inset(0 calc(100% - var(--lp,0) * 100%) 0 0);animation:shine 4s linear infinite alternate}
 .ld-tag,.ld-row{position:absolute;left:0;right:0;margin:0;text-align:center;color:var(--lab);transition:opacity 0.4s}
 .ld-tag{top:clamp(40px,9vh,90px);opacity:0;animation:heroUp 0.8s var(--ease) 0.2s forwards}
@@ -2828,7 +2828,7 @@ class Component extends DCLogic {
     try { window.addEventListener('pointermove', this._ldPar, { passive: true }); } catch (err) {}
     if (!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) {
       const t1 = performance.now();
-      const drift = (now) => { if (done || this._dead) return; const k = (now - t1) / 1000; el.style.setProperty('--px', (Math.sin(k * 0.9) * 0.35).toFixed(3)); el.style.setProperty('--py', (Math.cos(k * 0.7) * 0.25).toFixed(3)); requestAnimationFrame(drift); };
+      const drift = (now) => { if (done || this._dead) return; const k = (now - t1) / 1000; el.style.setProperty('--px', (Math.sin(k * 0.9) * 0.16).toFixed(3)); el.style.setProperty('--py', (Math.cos(k * 0.7) * 0.12).toFixed(3)); requestAnimationFrame(drift); };
       requestAnimationFrame(drift);
     }
     ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach((ev) => window.addEventListener(ev, this._ldSkip, { passive: true }));

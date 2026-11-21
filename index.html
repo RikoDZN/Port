@@ -2210,7 +2210,7 @@ class Component extends DCLogic {
       if (goal !== c.goal) {
         const steps = Math.abs(goal - c.pos);
         c.goal = goal;
-        c.tw = { from: c.pos, to: goal, t0: t, dur: c.rm ? 1 : Math.min(1700, 1000 + 240 * Math.max(0, steps - 1)) };
+        c.tw = { from: c.pos, to: goal, t0: t, dur: c.rm ? 1 : Math.min(1100, 720 + 120 * Math.max(0, steps - 1)) };
       }
       const prevPos = c.pos;
       if (c.tw) {
@@ -2252,7 +2252,7 @@ class Component extends DCLogic {
     }
     if (idx !== c.ui) {
       if (idx !== c.uiPend) { c.uiPend = idx; c.uiT = t; }
-      if (!c.pinned || t - c.uiT >= 140) { c.ui = idx; c.uiPend = -1; this.setState({ wk: idx }); }
+      if (!c.pinned || t - c.uiT >= 90) { c.ui = idx; c.uiPend = -1; this.setState({ wk: idx }); }
       else busy = true;
     }
     if (Math.abs(bar - c.wkp) > 0.0015) { c.wkp = bar; c.stage.style.setProperty('--wkp', bar.toFixed(4)); }
@@ -2316,11 +2316,11 @@ class Component extends DCLogic {
     const se = this.wkScroller();
     const rm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     if (Math.abs(delta) < 1) return true;
-    try { se.scrollBy({ top: delta, behavior: smooth === false || rm ? 'auto' : 'smooth' }); } catch (err) { se.scrollTop += delta; }
+    try { se.scrollBy({ top: delta, behavior: smooth === true && !rm ? 'smooth' : 'instant' }); } catch (err) { se.scrollTop += delta; }
     return true;
   }
   wkRest() {
-    if (this._touching || this._dead) return;
+    return;
     const g = this.wkGeom();
     if (!g || !g.pinned) return;
     const eps = 4, per = g.per, o = g.o, total = g.total;

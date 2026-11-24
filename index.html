@@ -38,9 +38,9 @@ a:hover{color:inherit}
 /* ---------- atmosphere ---------- */
 .aura{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .aura i{position:absolute;width:62vw;aspect-ratio:1;border-radius:50%}
-.aura i:nth-child(1){left:-18vw;top:-20vw;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 13%,transparent),transparent);animation:au1 38s ease-in-out infinite alternate}
-.aura i:nth-child(2){right:-24vw;top:30%;background:radial-gradient(closest-side,rgba(155,92,255,0.2),transparent);animation:au2 44s ease-in-out infinite alternate}
-.aura i:nth-child(3){left:20vw;bottom:-34vw;background:radial-gradient(closest-side,rgba(255,170,70,0.13),transparent);animation:au3 52s ease-in-out infinite alternate}
+.aura i:nth-child(1){left:-18vw;top:-20vw;background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 13%,transparent),transparent)}
+.aura i:nth-child(2){right:-24vw;top:30%;background:radial-gradient(closest-side,rgba(155,92,255,0.2),transparent)}
+.aura i:nth-child(3){left:20vw;bottom:-34vw;background:radial-gradient(closest-side,rgba(255,170,70,0.13),transparent)}
 @keyframes au1{to{transform:translate(22vw,26%) scale(1.1)}}
 @keyframes au2{to{transform:translate(-20vw,18%) scale(0.92)}}
 @keyframes au3{to{transform:translate(12vw,-30%) scale(1.08)}}
@@ -328,8 +328,6 @@ a:hover{color:inherit}
 
 
 /* ---------- performance: only animate what is on screen ---------- */
-.v2.pv > :is(section,footer,.tapes):not([data-vis]),.v2.pv > :is(section,footer,.tapes):not([data-vis]) *,.v2.pv > :is(section,footer,.tapes):not([data-vis]) *::before,.v2.pv > :is(section,footer,.tapes):not([data-vis]) *::after{animation-play-state:paused !important}
-.v2.pv .chs > .ch:not([data-vis]) *,.v2.pv .chs > .ch:not([data-vis]) *::before,.v2.pv .chs > .ch:not([data-vis]) *::after{animation-play-state:paused !important}
 .v2.pv .aura i{animation-play-state:paused}
 
 /* ---------- full-screen chapters ---------- */
@@ -337,9 +335,10 @@ a:hover{color:inherit}
 .ch{position:relative}
 .ch + .ch{margin-top:clamp(18px,2vw,30px)}
 .ch-stage{position:relative;height:min(100vh,900px);min-height:620px;overflow:hidden}
-.ch-frame{position:absolute;inset:0;overflow:hidden;background:#0E0C14;transform:scale(calc(0.8 + var(--cp,1) * 0.2));opacity:calc(0.35 + var(--cp,1) * 0.65);border-radius:28px;will-change:transform}
+.ch-frame{position:absolute;inset:0;overflow:hidden;background:#0E0C14;transform:scale(calc(0.8 + var(--cp,1) * 0.2));opacity:calc(0.35 + var(--cp,1) * 0.65);border-radius:28px}
+.ch[data-vis] .ch-frame,.ch[data-vis] .ch-img{will-change:transform}
 .ch[data-full] .ch-frame{border-radius:0}
-.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;transform:translate(calc(var(--cq,0) * -2.2%),calc(var(--cq,0) * -1.4%)) scale(calc(1.2 - var(--cp,1) * 0.12 + var(--cq,0) * 0.12));transform-origin:60% 45%;animation:camDrift 26s ease-in-out infinite alternate}
+.ch-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:translate(calc(var(--cq,0) * -2.2%),calc(var(--cq,0) * -1.4%)) scale(calc(1.2 - var(--cp,1) * 0.12 + var(--cq,0) * 0.12));transform-origin:60% 45%;animation:camDrift 26s ease-in-out infinite alternate}
 .ch-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,6,10,0.9) 0%,rgba(7,6,10,0.55) 36%,rgba(7,6,10,0) 62%),linear-gradient(0deg,rgba(7,6,10,0.85) 0%,rgba(7,6,10,0) 40%),radial-gradient(70% 60% at 0% 100%,color-mix(in srgb,var(--a) 30%,transparent),transparent 70%)}
 .ch-ui{position:absolute;left:0;bottom:0;z-index:2;width:min(900px,100%);padding:0 clamp(20px,4.5vw,72px) clamp(36px,7vh,80px);opacity:var(--cu,1);transform:translateY(calc((1 - var(--cu,1)) * 50px))}
 .ch-n{display:inline-flex;align-items:center;gap:12px;margin:0 0 14px;color:#F4F1EA}
@@ -454,7 +453,7 @@ a:hover{color:inherit}
 
 /* ---------- dynamic island nav ---------- */
 .nav{position:sticky;top:0;z-index:60;height:0}
-.isl{position:absolute;top:14px;left:0;right:0;margin:0 auto;width:980px;max-width:calc(100% - 24px);display:flex;flex-direction:column;border-radius:28px;overflow:hidden;background:rgba(10,9,14,0.9);border:1px solid rgba(255,255,255,0.12);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 20px 60px -24px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,0.08);transition:width 0.65s cubic-bezier(0.34,1.36,0.64,1),background 0.4s ease,border-color 0.4s ease}
+.isl{position:absolute;top:14px;left:0;right:0;margin:0 auto;width:980px;max-width:calc(100% - 24px);display:flex;flex-direction:column;border-radius:28px;overflow:hidden;background:rgba(10,9,14,0.9);border:1px solid rgba(255,255,255,0.12);box-shadow:0 20px 60px -24px rgba(0,0,0,0.85),inset 0 1px 0 rgba(255,255,255,0.08);transition:width 0.65s cubic-bezier(0.34,1.36,0.64,1),background 0.4s ease,border-color 0.4s ease}
 .isl-row{display:flex;align-items:center;justify-content:space-between;gap:14px;height:56px;padding:0 8px 0 20px;transition:height 0.5s cubic-bezier(0.34,1.36,0.64,1),padding 0.4s ease}
 .isl-l{display:flex;align-items:center;gap:14px;min-width:0}
 .brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;font-family:Anybody,sans-serif;font-stretch:130%;font-weight:900;font-size:17px;letter-spacing:-0.01em;color:var(--ink)}
@@ -877,6 +876,10 @@ a:hover{color:inherit}
 .cur[data-m="off"] i,.cur[data-m="off"] b,.cur:not([data-m]) i{opacity:0}
 
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.v2 *,.v2 *::before,.v2 *::after{animation:none !important;transition:none !important}}
+
+/* off-screen: drop the big decorative layers entirely */
+.v2.pv > :is(section,footer,.tapes):not([data-vis]) :is(.ch-fx,.zi-dust),.v2.pv .chs > .ch:not([data-vis]) .ch-fx{display:none !important}
+[data-ad]{animation:none !important}
 </style>
 <style>body{margin:0;background:#07060A}</style>
 </head>
@@ -2787,15 +2790,47 @@ class Component extends DCLogic {
       if (this._hasEnd) document.addEventListener('scrollend', this._onRest, { capture: true, passive: true });
       ['touchstart', 'touchend', 'touchcancel'].forEach((n) => document.addEventListener(n, this._onTouch, { capture: true, passive: true }));
     } catch (err) {}
+    // A finished reveal animation keeps its GPU layer forever; once it has
+    // landed on the element's normal look, drop it so the layer is freed.
+    this._onAnEnd = (e) => {
+      const el = e.target;
+      if (e.pseudoElement || !el || el.nodeType !== 1 || el.hasAttribute('data-ad')) return;
+      const cs = window.getComputedStyle(el);
+      if (/infinite/.test(cs.animationIterationCount)) return;
+      const look = () => [cs.opacity, cs.transform, cs.filter, cs.translate, cs.scale, cs.rotate, cs.clipPath, cs.color, cs.letterSpacing].join('|');
+      const before = look();
+      el.setAttribute('data-ad', '');
+      if (look() !== before) el.removeAttribute('data-ad');
+    };
+    try { document.addEventListener('animationend', this._onAnEnd, true); } catch (err) {}
     try { this.motionInit(); } catch (err) {}
     try { this.ldInit(); } catch (err) {}
     try { this.visInit(); } catch (err) {}
-    this._onWheel = (e) => { this.wkWheel(e); this.shdWheel(e); };
+    // Blocking scroll listeners make every scroll wait on script, so they only
+    // exist while the Selected work section is near the screen.
+    this._onWheel = (e) => this.wkWheel(e);
     this._onTStep = (e) => this.wkTouchStep(e);
+    this._onShdW = (e) => this.shdWheel(e);
+    this._wkOn = false;
+    const wkHook = (on) => {
+      if (on === this._wkOn) return;
+      this._wkOn = on;
+      const f = on ? 'addEventListener' : 'removeEventListener';
+      try {
+        window[f]('wheel', this._onWheel, { passive: false });
+        ['touchstart', 'touchmove', 'touchend'].forEach((n) => window[f](n, this._onTStep, { passive: false }));
+      } catch (err) {}
+    };
+    this._wkHook = wkHook;
     try {
-      window.addEventListener('wheel', this._onWheel, { passive: false });
-      ['touchstart', 'touchmove', 'touchend'].forEach((n) => window.addEventListener(n, this._onTStep, { passive: false }));
-    } catch (err) {}
+      const shd = document.querySelector('.shd');
+      if (shd) shd.addEventListener('wheel', this._onShdW, { passive: false });
+      const wk = document.getElementById('work');
+      if (wk && window.IntersectionObserver) {
+        this._wkIO = new window.IntersectionObserver((ents) => ents.forEach((en) => wkHook(en.isIntersecting)), { rootMargin: '100% 0px 100% 0px' });
+        this._wkIO.observe(wk);
+      } else wkHook(true);
+    } catch (err) { wkHook(true); }
   }
   ldInit() {
     const el = document.querySelector('.ld');
@@ -2850,10 +2885,41 @@ class Component extends DCLogic {
   visInit() {
     if (!window.IntersectionObserver) return;
     this._visIO = new window.IntersectionObserver((ents) => {
-      ents.forEach((en) => { if (en.isIntersecting) en.target.setAttribute('data-vis', ''); else en.target.removeAttribute('data-vis'); });
+      ents.forEach((en) => {
+        const el = en.target;
+        if (en.isIntersecting) { el.setAttribute('data-vis', ''); this.visResume(el); }
+        else { el.removeAttribute('data-vis'); this.visPark(el); }
+      });
     }, { rootMargin: '120px 0px 120px 0px' });
     document.querySelectorAll('.v2 > section, .v2 > footer, .v2 > .tapes, .v2 .chs > .ch').forEach((el) => this._visIO.observe(el));
     this.setState({ pv: true });
+  }
+  // Looping effects off screen still cost GPU memory and compositing, so they
+  // are stopped (not paused) and restarted when their section comes back.
+  // One-shot reveals are left alone so they always finish.
+  visPark(el) {
+    if (!el.getAnimations) return;
+    const parked = this._parked || (this._parked = new Map());
+    const list = parked.get(el) || [];
+    el.getAnimations({ subtree: true }).forEach((a) => {
+      try {
+        if (a.effect && a.effect.getTiming().iterations === Infinity && a.playState !== 'idle') { a.cancel(); list.push(a); }
+      } catch (err) {}
+    });
+    parked.set(el, list);
+  }
+  visResume(el) {
+    const parked = this._parked;
+    const list = parked && parked.get(el);
+    if (!list || !list.length) return;
+    const keep = [];
+    list.forEach((a) => {
+      const t = a.effect && a.effect.target;
+      const ch = t && t.closest ? t.closest('.ch') : null;
+      if (ch && ch !== el && !ch.hasAttribute('data-vis')) { const l2 = parked.get(ch) || []; l2.push(a); parked.set(ch, l2); return; }
+      try { a.play(); } catch (err) {}
+    });
+    parked.set(el, keep);
   }
   motionInit() {
     const win = window;
@@ -3203,6 +3269,8 @@ class Component extends DCLogic {
     try {
       if (this._onWheel) window.removeEventListener('wheel', this._onWheel);
       if (this._onTStep) ['touchstart', 'touchmove', 'touchend'].forEach((n) => window.removeEventListener(n, this._onTStep));
+      if (this._wkIO) this._wkIO.disconnect();
+      if (this._onAnEnd) document.removeEventListener('animationend', this._onAnEnd, true);
     } catch (err) {}
     if (this._rfRaf) cancelAnimationFrame(this._rfRaf);
     if (this._tcT) clearInterval(this._tcT);
